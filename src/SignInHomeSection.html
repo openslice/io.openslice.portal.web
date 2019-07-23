@@ -1,0 +1,67 @@
+<div class="section section-signup" ng-controller="LoginCtrl">
+	<div  class="container">
+		<div class="row shadowed-dark" >
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 ">
+				<h1>&nbsp;</h1>
+				<h2>
+					Welcome to the {{portalName}} portal!
+				</h2>
+				<h4>Use the fields on the right to login
+					to the {{portalName}} portal and easily deploy an experiment over 
+					the {{portalName}} infrastructure!</h4>
+				<h4>Check our <strong><a style="color:#FFFFFF;" href="{{portalwiki}}">wiki</a></strong> for further documenation</h4>
+				<h4>Report platform issues at our <strong><a style="color:#FFFFFF;" href="{{bugzilla}}">Bugzilla</a></strong></h4>
+				<h4>Check the <strong><a style="color:#FFFFFF;" href="{{healthstatus}}">Health Status</a></strong> of our infrastructure</h4>
+				
+				
+			</div>
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+				<h1>Sign In</h1>
+				<p >Use the following fields to sign in {{portalName}}  portal</p>
+				<div class="alert alert-danger" ng-show="loginError">Username and/or Password Incorrect</div>
+  
+				<form ng-submit="login()">
+					<div  class="form-group">
+						<input class="form-control" type="text" ng-model='user.username' placeholder="username" />
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control"  name="password"  ng-model='user.password'
+									placeholder="Your password"/>
+					</div>
+					 <button type="submit" class="btn btn-default">Sign In</button> or <a style="color: white;" href="#!/signup" ><b>Sign up</b> for the {{portalName}} portal!</a>
+					
+				</form>
+				
+				<!-- 
+				<h4>..or sign-in with</h4>
+				<div >
+					<button type="submit" class="btn btn-info" ng-click="showOauth2FIWAREPopup()" >FI-WARE login</button>		
+				</div>
+				 -->
+				
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div ng-show="!loggedIn" class="section" >
+	<div  class="container">
+			<div class="row">
+				<!--  ------------------------  START CONTENT      ------------------------      -->
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h1>&nbsp;</h1>
+					<h1 class="shadowed">Deploy {{portalName}} experiments!</h1>
+					<p>Access, create
+						and share experiments over the {{portalName}} infrastructure!</p>
+					<h1>&nbsp;</h1>
+				</div>
+				
+			
+			</div>
+			<!--  ------------------------  END CONTENT      ------------------------      -->
+	</div>
+</div>

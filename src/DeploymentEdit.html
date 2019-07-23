@@ -1,0 +1,145 @@
+<div class="page-header" >
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h1 id="headerTitle">Deployment management</h1>
+				
+
+				<form class="form-horizontal" name="form" role="form" ng-submit="updateDeployment()" id="addApplicationForm">													
+					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">User</label>
+						<div class="col-sm-10">
+							{{adeployment.owner.username}} ( {{adeployment.owner.name}}, {{adeployment.owner.email}}, {{adeployment.owner.organization}} )
+						</div>
+					</div>					
+				
+					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">Experiment</label>
+						<div class="col-sm-10">
+							{{adeployment.experiment.name}}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">Infrastructure</label>
+						<div class="col-sm-10">
+							{{adeployment.infrastructureForAll.name}}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">Mentor</label>
+						<div class="col-sm-10">
+							{{adeployment.mentor.name}}, email: {{adeployment.mentor.email}}
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="adeployment.placements" class="col-sm-2 control-label">Constituent VxF Placement:</label>
+						<div class="col-sm-10">
+							<div id="tableExtensions" class="table-editable">
+							    <table class="table">
+							      <tr>
+							        <th>constituent VxF</th>
+							        <th>Infrastructure</th>
+							        <th></th>
+							      </tr>
+							      <tr class="" ng-repeat="ext in adeployment.vxfPlacements">
+							         <td>{{ext.constituentVxF.vnfdidRef}} [ membervnfIndex:{{ext.constituentVxF.membervnfIndex}} ]</td>
+							         <td>{{ext.infrastructure.name}}</td>							       							       
+							      </tr>							      
+							    </table>
+							  </div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">Name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control"  ng-model="adeployment.name" value="" placeholder="enter an alias for your requested deployment" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="vxf.longDescription" class="col-sm-2 control-label">Description</label>
+						<div class="col-sm-10">
+							<textarea class="form-control"   rows="5"  ng-model="adeployment.description" value="" placeholder="" /></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">Tentative Start Date</label>
+						<div class="col-sm-10">
+							 <md-datepicker ng-model="adeployment.startReqDate" md-placeholder="Enter date" md-date-locale ="{ msgOpenCalendar: 'Open a special calendar' }" disabled></md-datepicker>
+						</div>
+						<label for="app.name" class="col-sm-2 control-label">Tentative Start Time (UTC)</label>
+						<div class="col-sm-10">
+							<select style='width:100px;float:left;' class="form-control" ng-model="adeployment.startReqHour" ng-options="option as option for option in ['00', '01', '02', '03','04', '05','06', '07','08', '09','10', '11','12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']" required disabled ></select>
+							<select style='width:100px;float:left;' class="form-control" ng-model="adeployment.startReqMinute" ng-options="option as option for option in minutes"  required disabled></select>
+							<!-- ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55'] -->
+						</div>						
+					</div>
+					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">Tentative End Date</label>
+						<div class="col-sm-10">
+							 <md-datepicker ng-model="adeployment.endReqDate" md-placeholder="Enter date" disabled></md-datepicker>
+						</div>
+						<label for="app.name" class="col-sm-2 control-label">Tentative End Time (UTC)</label>
+						<div class="col-sm-10">
+							<select style='width:100px;float:left;' class="form-control" ng-model="adeployment.endReqHour" ng-options="option as option for option in ['00', '01', '02', '03','04', '05','06', '07','08', '09','10', '11','12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']" required disabled></select>
+							<select style='width:100px;float:left;' class="form-control" ng-model="adeployment.endReqMinute" ng-options="option as option for option in minutes"  required disabled></select>
+							<!-- ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55'] -->
+						</div>						
+					</div>
+					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">Scheduled Start Date</label>
+						<div class="col-sm-10">
+							 <md-datepicker ng-model="adeployment.startDate" md-placeholder="Enter date" md-date-locale ="{ msgOpenCalendar: 'Open a special calendar' }" ></md-datepicker>
+						</div>
+						<label for="app.name" class="col-sm-2 control-label">Scheduled Start Time (UTC)</label>
+						<div class="col-sm-10">
+							<select style='width:100px;float:left;' class="form-control" ng-model="adeployment.startHour" ng-options="option as option for option in ['00', '01', '02', '03','04', '05','06', '07','08', '09','10', '11','12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']" required ></select>
+							<select style='width:100px;float:left;' class="form-control" ng-model="adeployment.startMinute" ng-options="option as option for option in minutes"  required ></select>
+							<!-- ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55'] -->
+						</div>						
+					</div>
+					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">Scheduled End Date</label>
+						<div class="col-sm-10">
+							 <md-datepicker ng-model="adeployment.endDate" md-placeholder="Enter date"></md-datepicker>
+						</div>
+						<label for="app.name" class="col-sm-2 control-label">Scheduled End Time (UTC)</label>
+						<div class="col-sm-10">
+							<select style='width:100px;float:left;' class="form-control" ng-model="adeployment.endHour" ng-options="option as option for option in ['00', '01', '02', '03','04', '05','06', '07','08', '09','10', '11','12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']"  ng-init='22' required ></select>
+							<select style='width:100px;float:left;' class="form-control" ng-model="adeployment.endMinute" ng-options="option as option for option in minutes" required ></select>
+						</div>						
+					</div>
+
+					<div class="form-group">
+						<label for="role" class="col-sm-2 control-label">Status</label>
+						<div class="col-sm-10">
+							<select class="form-control" ng-model="adeployment.status" >
+							  <option>UNDER_REVIEW</option>
+							  <option selected="selected">SCHEDULED</option>
+							  <option selected="selected">RUNNING</option>
+							  <option selected="selected">COMPLETED</option>
+							  <option selected="selected">REJECTED</option>
+							  
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="adeployment.feedback" class="col-sm-2 control-label">Comments and Feedback</label>
+						<div class="col-sm-10">
+							<textarea class="form-control"   rows="5"  ng-model="adeployment.feedback" value="" placeholder="" /></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input class="btn btn-default" type="submit" value="Save" />
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>

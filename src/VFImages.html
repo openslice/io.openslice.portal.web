@@ -1,0 +1,87 @@
+<div class="page-header" >
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h1>All registered available Images</h1>
+				<h3>View and manage registered Images</h3>
+				
+				<a class="btn btn-success btn-lg" data-toggle="modal" ng-href="#!/vfimage_upload"> 
+				<i class="fa fa-upload fa-2x pull-left"></i>&nbsp;&nbsp;Register Image<br>archive</a>
+				
+				<br>
+				<br>
+				<table id="grid1" tr-ng-grid="" class="usersGrid" items="vfimages" page-items="50"
+					fields="['id', 'name', 'published', 'shortDescription', 'owner.username']">					
+					<thead>
+						<tr>
+							<th field-name="id" display-name="Id" cell-width="5em" display-align="right"></th>
+							<th field-name="name" display-name="Name"></th>
+							<th field-name="published" display-name="Published"></th>					
+			                
+							<th>
+			                    <div class="tr-ng-title">
+			                        Date created
+			                    </div>
+			                </th>
+			                <th>
+			                    <div class="tr-ng-title">
+			                        Date updated
+			                    </div>
+			                </th>
+			                <th>
+			                    <div class="tr-ng-title">
+			                        Public URL
+			                    </div>
+			                 </th>
+			                <th>
+			                    <div class="tr-ng-title">
+			                        Local repository
+			                    </div>
+			                 </th>
+			                <th>
+			                    <div class="tr-ng-title">
+			                        Used by VxF:
+			                    </div>
+			                 </th>
+			                <th>
+			                    <div class="tr-ng-title">
+			                        Deployed to VIMs:
+			                    </div>
+			                 </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td nowrap="nowrap" >
+							<p> {{gridItem.dateCreated| date:'medium'}} </p>
+							</td>
+							<td nowrap="nowrap" >
+							<p> {{gridItem.dateUpdated| date:'medium'}} </p>
+							</td>
+							<td nowrap="nowrap" >
+							 <a ng-show="gridItem.publicURL" href="{{gridItem.publicURL}}">Download</a>
+							</td>							
+							
+							<td><a ng-show="gridItem.packageLocation" href="{{gridItem.packageLocation}}">Download</a></td>
+							
+							<td nowrap="nowrap" >
+							<div ng-repeat="rvxf in gridItem.refVxFs">{{rvxf.name}}  {{$last ? '' : ', '}}</div>
+							</td>
+							<td nowrap="nowrap" >
+							<div ng-repeat="vim in gridItem.deployedInfrastructures">{{vim.name}}  {{$last ? '' : ', '}}</div>
+							</td>
+							
+							<td nowrap="nowrap" >
+								<a class="btn btn-primary" ng-href="#!/vfimage_edit/{{gridDisplayItem.id}}"><i class="fa fa-pencil-square-o "></i></a>
+								<a class="btn btn-danger" ng-click="deleteVFImage(gridItem, gridItem.id)"><i class="fa fa-trash-o "></i></a>										
+								<a class="btn btn-info" ng-href="#!/vfimage_view/{{gridDisplayItem.id}}"><i class="fa fa-info-circle "></i></a>	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</div>

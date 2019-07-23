@@ -1,0 +1,109 @@
+<div class="page-header" >
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h1 id="headerTitle">Add new Experiment Descriptor</h1>
+				<h3>by user: {{exprm.owner.username}}</h3>
+
+				<form class="form-horizontal" name="form" role="form" ng-submit="submitNewExperiment()" id="addApplicationForm">
+					<div class="form-group">
+						<label for="exprm.name" class="col-sm-2 control-label">Name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control"  ng-model="exprm.name" value="" placeholder="name..." />
+							<p class="help-block">The name must be exactly the same as in the NSD descriptor ID (nsd:id) or name (nsd:name) values. For TOSCA use the metadata:ID</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="exprm.version" class="col-sm-2 control-label">Version</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control"  ng-model="exprm.version" value="" placeholder="" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="exprm.shortDescription" class="col-sm-2 control-label">Teaser</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control"  ng-model="exprm.shortDescription" value="" placeholder="" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="exprm.longDescription" class="col-sm-2 control-label">Description</label>
+						<div class="col-sm-10">
+							<textarea class="form-control"   rows="5"  ng-model="exprm.longDescription" value="" placeholder="" ></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="exprm.uploadedExperimentIcon" class="col-sm-2 control-label">Logo</label>
+						<div class="col-sm-10">
+							<input type="file" class="form-control" name="uploadedExperimentIcon"  file-model="exprm.uploadedExperimentIcon" placeholder="" />
+							<p class="help-block">Select logo image</p>
+							
+						</div>
+					</div>
+					
+					
+					
+					<div class="form-group">
+						<label for="exprm.uploadedExperimentFile" class="col-sm-2 control-label">Package File (.tar.gz)</label>
+						<div class="col-sm-10">
+							<input type="file" class="form-control" name="uploadedExperimentFile"  file-model="uploadedExperimentFile" placeholder="" />
+							<p class="help-block">Select file (.tar.gz)</p>
+							
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<label for="role" class="col-sm-2 control-label">Packaging format</label>
+						<div class="col-sm-10">
+							<select class="form-control" ng-options="opt for opt in ['OSMvFOUR','OSMvFIVE']" ng-model="exprm.packagingFormat" required><option></option></select>
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<label for="exprm.category" class="col-sm-2 control-label">Category ( <span ng-repeat="appcat in exprm.categories">{{appcat.name}} </span> )</label>
+						<div class="col-sm-10">
+							<select multiple class="form-control" ng-model="exprm.categories" ng-options="cat.name for cat in categories" >
+							</select>
+						</div>
+					</div>
+
+
+					
+					<div class="form-group">
+						<label for="exprm.extensions" class="col-sm-2 control-label">Extension variables</label>
+						<div class="col-sm-10">
+							<div id="tableExtensions" class="table-editable">
+							    <span class="table-add glyphicon glyphicon-plus" ng-click="addExtension(exprm)"></span>
+							    <table class="table" >
+							      <tr>
+							        <th>Name</th>
+							        <th>Value</th>
+							        <th></th>
+							      </tr>
+							      <tr class="" ng-repeat="ext in exprm.extensions">
+									<td><pre contenteditable="true" ng-model="ext.name"></pre></td>
+							        <td><pre contenteditable="true" ng-model="ext.value"></pre></td>
+							        <td>
+							          <span class="table-remove glyphicon glyphicon-remove" ng-click="removeRow(ext)"></span>
+							        </td>
+							       
+							      </tr>
+							      
+							    </table>
+							  </div>
+						</div>
+					  </div>
+					
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input class="btn btn-default" type="submit" value="Save" />
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,55 @@
+<div class="page-header" >
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 appIconMainScreen" >
+				<h1></h1>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 tileimg" style="background: url({{exprm.iconsrc}}) no-repeat center center;">
+				<h3 ng-show="exprm.valid"  ><span class="validtext_content validtext_content_small">Valid</span></h3>
+				</div>
+				<h4>Version: {{exprm.version}}</h4>
+				
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<h1 id="headerTitle">{{exprm.name}} </h1>
+				<p><span ng-repeat="vxfcat in exprm.categories"><span class="label label-info">{{vxfcat.name}}</span>&nbsp;&nbsp;</span></p>
+				<a class="btn btn-success btn-lg" data-toggle="modal" ng-href="{{exprm.packageLocation}}"> 
+				<i class="fa fa-download fa-2x pull-left"></i><b>&nbsp;&nbsp;&nbsp;&nbsp;Package&nbsp;&nbsp;&nbsp;&nbsp;</b><br><small>Version: {{exprm.version}}</small></a>
+				<h3>{{exprm.shortDescription}}</h3>
+				<p>Author: <strong>{{exprm.owner.username}}</strong>, Organization: <strong>{{exprm.owner.organization}}</strong></p>
+				<p>Date created: <strong>{{exprm.dateCreated| date:'medium'}}</strong>, Last update: <strong>{{exprm.dateUpdated | date:'medium' }}</strong></p>
+				<p>UUID: <strong>{{exprm.uuid}}</strong></p>
+				<p>Status: <strong>{{ exprm.valid?'Validated':'Not Valid'; }}</strong></p>
+				<p ng-show="exprm.certified">Certified by: <strong  >{{exprm.certifiedBy}}</strong></p>
+				<p>Onboarded to MANO providers: <span ng-repeat="vobd in exprm.experimentOnBoardDescriptors | filter:{onBoardingStatus: 'ONBOARDED'}"> <span class="label label-primary"> {{vobd.obMANOprovider.name}} </span> &nbsp;  </span></p>
+				<p>Constituents: <span ng-repeat="cvxf in exprm.constituentVxF"> <a class="btn btn-default" href="#!/vxf_view/{{cvxf.vxfref.id}}" role="button"> {{cvxf.membervnfIndex}}: {{cvxf.vnfdidRef}}  </a> &nbsp;  </span></p>
+				
+				
+				<div class="col-sm-12" role="tabpanel">
+				
+				<!-- Nav tabs -->
+					<!-- Nav tabs -->
+				  <ul class="nav nav-tabs" role="tablist" >
+				    <li ng-repeat="tab in tabs" role="presentation" ng-class="{'active': isActive(tab) }">
+				    	<a data-target="{{tab.id}}" aria-controls="{{tab.id}}" role="tab" data-toggle="tab" ng-click="activate(tab)" >{{tab.title}}</a></li>
+				   </ul>
+					
+					  <!-- Tab panes -->
+				  <div class="col-sm-12 tab-content"  >
+				    <div ng-repeat="tab in tabs" role="tabpanel"  ng-class="{'tab-pane':true, 'active': isActive(tab) }" id="{{tab.id}}">
+				     <p ng-bind-html="tab.content" ></p> 
+				    
+											  
+				  </div>								
+				</div>		
+					
+				</div>
+				
+
+
+		
+
+			</div>
+		</div>
+	</div>
+</div>
