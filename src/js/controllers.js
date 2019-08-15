@@ -347,7 +347,7 @@ appControllers.controller('ExperimentAddController', function($scope, $location,
 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/experiments/',
+			url : APIEndPointService.APIURL+'admin/experiments/',
 			headers : {
 				'Content-Type' : 'multipart/form-data'
 			},
@@ -403,7 +403,7 @@ appControllers.controller('ExperimentUploadController', function($scope, $locati
 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/experiments/',
+			url : APIEndPointService.APIURL+'admin/experiments/',
 			headers : {
 				'Content-Type' : 'multipart/form-data'
 			},
@@ -548,7 +548,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 
         return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/experimentobds/',
+			url : APIEndPointService.APIURL+'admin/experimentobds/',
 			headers : {
 				'Content-Type' : 'application/json'
 			},
@@ -627,7 +627,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 
 	        return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'services/api/repo/admin/experimentobds/'+ eOnBoardedDescriptor.id +'/onboard',
+				url : APIEndPointService.APIURL+'admin/experimentobds/'+ eOnBoardedDescriptor.id +'/onboard',
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -682,7 +682,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 	  	    	  //here make a get
 		  	        return $http({
 		  				method : 'GET',
-		  				url : APIEndPointService.APIURL+'services/api/repo/admin/experimentobds/'+ eOnBoardedDescriptor.id +'/status',
+		  				url : APIEndPointService.APIURL+'admin/experimentobds/'+ eOnBoardedDescriptor.id +'/status',
 		  				headers : {
 		  					'Content-Type' : 'application/json'
 		  				},
@@ -725,7 +725,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 
 		        return $http({
 					method : 'PUT',
-					url : APIEndPointService.APIURL+'services/api/repo/admin/experimentobds/'+ eOnBoardedDescriptor.id +'/offboard',
+					url : APIEndPointService.APIURL+'admin/experimentobds/'+ eOnBoardedDescriptor.id +'/offboard',
 					headers : {
 						'Content-Type' : 'application/json'
 					},
@@ -765,7 +765,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 		 		 
 			return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'services/api/repo/admin/experiments/'+$routeParams.id,
+				url : APIEndPointService.APIURL+'admin/experiments/'+$routeParams.id,
 				headers : {
 					'Content-Type' : 'multipart/form-data'
 				},
@@ -1136,7 +1136,7 @@ appControllers.controller('VxFAddController', function($scope, $location,
 		 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/vxfs/',
+			url : APIEndPointService.APIURL+'admin/vxfs/',
 			headers : {
 				'Content-Type' : 'multipart/form-data'
 			},
@@ -1189,7 +1189,7 @@ appControllers.controller('VxFUploadController', function($scope, $location,
 		 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/vxfs/',
+			url : APIEndPointService.APIURL+'admin/vxfs/',
 			headers : {
 				'Content-Type' : 'multipart/form-data'
 			},
@@ -1262,7 +1262,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 
 	        return $http({
 				method : 'POST',
-				url : APIEndPointService.APIURL+'services/api/repo/admin/vxfobds/',
+				url : APIEndPointService.APIURL+'admin/vxfobds/',
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -1317,7 +1317,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 
 	        return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'services/api/repo/admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/onboard',
+				url : APIEndPointService.APIURL+'admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/onboard',
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -1373,7 +1373,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 	  	    	  //here make a get
 		  	        return $http({
 		  				method : 'GET',
-		  				url : APIEndPointService.APIURL+'services/api/repo/admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/status',
+		  				url : APIEndPointService.APIURL+'admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/status',
 		  				headers : {
 		  					'Content-Type' : 'application/json'
 		  				},
@@ -1421,7 +1421,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 
 		        return $http({
 					method : 'PUT',
-					url : APIEndPointService.APIURL+'services/api/repo/admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/offboard',
+					url : APIEndPointService.APIURL+'admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/offboard',
 					headers : {
 						'Content-Type' : 'application/json'
 					},
@@ -1461,7 +1461,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 		 		 
 			return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'services/api/repo/admin/vxfs/'+$routeParams.id,
+				url : APIEndPointService.APIURL+'admin/vxfs/'+$routeParams.id,
 				headers : {
 					'Content-Type' : 'multipart/form-data'
 				},
@@ -1741,7 +1741,7 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
  	 function mydeployments() {
 		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/deployments/user' ,
+			url : APIEndPointService.APIURL+'admin/deployments/user' ,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -1764,7 +1764,7 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
 	$scope.showCompletedDeployments = function () {
 		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/deployments/user?status=COMPLETED' ,
+			url : APIEndPointService.APIURL+'admin/deployments/user?status=COMPLETED' ,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -1779,7 +1779,7 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
  	$scope.showRejectedDeployments = function () {
  		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/deployments/user?status=REJECTED' ,
+			url : APIEndPointService.APIURL+'admin/deployments/user?status=REJECTED' ,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -1794,7 +1794,7 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
  	$scope.showFailedDeployments = function () {
  		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/deployments/user?status=FAILED_OSM_REMOVED' ,
+			url : APIEndPointService.APIURL+'admin/deployments/user?status=FAILED_OSM_REMOVED' ,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -1905,7 +1905,7 @@ appControllers.controller('DeploymentAddController', ['$scope', '$route', '$root
 		
     	return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/deployments/',
+			url : APIEndPointService.APIURL+'admin/deployments/',
 			headers : {
 				'Content-Type' : 'application/json'
 			},
@@ -1993,7 +1993,7 @@ appControllers.controller('DeploymentsAdminListController', ['$scope','$window',
 	 		
 	 		return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'services/api/repo/admin/deployments/'+depidx+'?action='+action,
+				url : APIEndPointService.APIURL+'admin/deployments/'+depidx+'?action='+action,
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -2116,7 +2116,7 @@ appControllers.controller('DeploymentEditController', ['$scope', '$route', '$roo
 	        
 	        return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'services/api/repo/admin/deployments/'+$scope.adeployment.id,
+				url : APIEndPointService.APIURL+'admin/deployments/'+$scope.adeployment.id,
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -2142,7 +2142,7 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
                                          function( $scope, $route, $routeParams, $location, PortalUser, $anchorScroll, APIEndPointService, $http,formDataObject){
 	$scope.portaluser=new PortalUser();
     $scope.portaluser.active='false';
-    $scope.portaluser.role = 'EXPERIMENTER';
+    $scope.portaluser.role = 'ROLE_EXPERIMENTER';
     
     $scope.registerNewPortalUser=function(){
         	
@@ -2160,7 +2160,7 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
         	
         	return $http({
     			method : 'POST',
-    			url : APIEndPointService.APIURL+'services/api/repo/register/',
+    			url : APIEndPointService.APIURL+'register/',
     			headers : {
     				'Content-Type' : 'multipart/form-data'
     			},
@@ -2394,7 +2394,7 @@ appControllers.controller('RegisterConfigController', ['$scope', '$route', '$rou
 	
 	return $http({
 		method : 'POST',
-		url : APIEndPointService.APIURL+'services/api/repo/register/verify',
+		url : APIEndPointService.APIURL+'register/verify',
 		headers : {
 			'Content-Type' : 'multipart/form-data'
 		},
@@ -2517,7 +2517,7 @@ appControllers.controller('InfrastructureAddImageController',['$scope', '$route'
 		 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/infrastructures/' + $scope.portalinfrastructure.id + '/images/' + $scope.vfselectedimage.id
+			url : APIEndPointService.APIURL+'admin/infrastructures/' + $scope.portalinfrastructure.id + '/images/' + $scope.vfselectedimage.id
 		}).then(function( response ) {
 			$location.path("/edit_infrastructure/" + $scope.portalinfrastructure.id );
 		}, function errorCallback(response) {
@@ -2590,7 +2590,7 @@ appControllers.controller('VFImageUploadController', function($scope, $location,
 	$scope.checkVFImageName = function checkName() {
 		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/vfimages/name/' + $scope.vfimage.name,
+			url : APIEndPointService.APIURL+'admin/vfimages/name/' + $scope.vfimage.name,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -2610,7 +2610,7 @@ appControllers.controller('VFImageUploadController', function($scope, $location,
 		 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/vfimages/',
+			url : APIEndPointService.APIURL+'admin/vfimages/',
 			headers : {
 				'Content-Type' : 'multipart/form-data'
 			},
@@ -2647,7 +2647,7 @@ appControllers.controller('VFImageEditController', function($scope, $location, $
 		 
 		return $http({
 			method : 'PUT',
-			url : APIEndPointService.APIURL+'services/api/repo/admin/vfimages/',
+			url : APIEndPointService.APIURL+'admin/vfimages/',
 			headers : {
 				'Content-Type' : 'multipart/form-data'
 			},

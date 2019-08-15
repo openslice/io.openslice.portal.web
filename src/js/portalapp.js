@@ -265,7 +265,7 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
 	    	    // center the popup window
 	    var left = screen.width/2 - 200
 	        , top = screen.height/2 - 250
-	        , popup = $window.open(APIEndPointService.APIURL+'services/api/repo/oauth2', '', "top=" + top + ",left=" + left + ",width=1024,height=500")
+	        , popup = $window.open(APIEndPointService.APIURL+'oauth2', '', "top=" + top + ",left=" + left + ",width=1024,height=500")
 	        , interval = 1000;
 
 
@@ -454,7 +454,7 @@ app.factory("authenticationSvc", ["$http","$q","$window","$rootScope", "$log", "
     function login(userName, password) {
         var deferred = $q.defer();
         $log.debug('========== > authenticationSvc Login');
-        $http.post(APIEndPointService.APIURL+"services/api/repo/sessions/", { username: userName, password: password })
+        $http.post(APIEndPointService.APIURL+"sessions/", { username: userName, password: password })
             .then(function (result) {
                 userInfo = {
                     accesstoken: "NOTIMPLEMENTED",//result.data.access_token,
@@ -476,7 +476,7 @@ app.factory("authenticationSvc", ["$http","$q","$window","$rootScope", "$log", "
 
         $http({
             method: "GET",
-            url: APIEndPointService.APIURL+"services/api/repo/sessions/logout",
+            url: APIEndPointService.APIURL+"sessions/logout",
             headers: {
                 //"access_token": "NOT_IMPLEMENTED"//userInfo.accessToken
             }
@@ -487,6 +487,10 @@ app.factory("authenticationSvc", ["$http","$q","$window","$rootScope", "$log", "
             $window.sessionStorage["userInfo"] = null;
             deferred.resolve(result);
         }, function (error) {
+        	$log.debug('========== > authenticationSvc logout RESET everything from error' );
+            userInfo = null;
+			$rootScope.loggedIn = false;
+            $window.sessionStorage["userInfo"] = null;
             deferred.reject(error);
         });
 
