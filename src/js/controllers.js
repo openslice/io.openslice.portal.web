@@ -2165,12 +2165,13 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
     				'Content-Type' : 'multipart/form-data'
     			},
     			data : {
-    				name: $scope.portaluser.name,
-    				username: $scope.portaluser.username,
-    				userpassword: $scope.portaluser.password,
-    				userorganization: $scope.portaluser.organization,
-    				useremail: $scope.portaluser.email,
-    				randomregid: randomid,
+    				portaluser: angular.toJson( $scope.portaluser, false ),
+    				//name: $scope.portaluser.name,
+    				// username: $scope.portaluser.username,
+    				// userpassword: $scope.portaluser.password,
+    				// userorganization: $scope.portaluser.organization,
+    				// useremail: $scope.portaluser.email,
+    				//randomregid: randomid,
     				emailmessage: msg,
     			},
     			transformRequest : formDataObject
