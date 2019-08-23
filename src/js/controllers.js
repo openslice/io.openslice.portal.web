@@ -1138,7 +1138,7 @@ appControllers.controller('VxFAddController', function($scope, $location,
 			method : 'POST',
 			url : APIEndPointService.APIURL+'admin/vxfs/',
 			headers : {
-				'Content-Type' : 'multipart/form-data'
+				'Content-Type' : undefined
 			},
 			data : {
 				vxf: angular.toJson( $scope.vxf, false ),
@@ -1189,9 +1189,9 @@ appControllers.controller('VxFUploadController', function($scope, $location,
 		 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'admin/vxfs/',
+			url : APIEndPointService.APIURL+'admin/vxfs',
 			headers : {
-				'Content-Type' : 'multipart/form-data'
+				'Content-Type' :  undefined
 			},
 			data : {
 				vxf: angular.toJson( $scope.vxf, false ),
