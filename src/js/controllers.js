@@ -349,7 +349,7 @@ appControllers.controller('ExperimentAddController', function($scope, $location,
 			method : 'POST',
 			url : APIEndPointService.APIURL+'admin/experiments/',
 			headers : {
-				'Content-Type' : 'multipart/form-data'
+				'Content-Type' : undefined
 			},
             //This method will allow us to change how the data is sent up to the server
             // for which we'll need to encapsulate the model data in 'FormData'
@@ -405,7 +405,7 @@ appControllers.controller('ExperimentUploadController', function($scope, $locati
 			method : 'POST',
 			url : APIEndPointService.APIURL+'admin/experiments/',
 			headers : {
-				'Content-Type' : 'multipart/form-data'
+				'Content-Type' : undefined
 			},
             //This method will allow us to change how the data is sent up to the server
             // for which we'll need to encapsulate the model data in 'FormData'
@@ -767,7 +767,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 				method : 'PUT',
 				url : APIEndPointService.APIURL+'admin/experiments/'+$routeParams.id,
 				headers : {
-					'Content-Type' : 'multipart/form-data'
+					'Content-Type' : undefined
 				},
 				data : {
 					exprm: angular.toJson( $scope.exprm, false ),					
@@ -1463,7 +1463,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 				method : 'PUT',
 				url : APIEndPointService.APIURL+'admin/vxfs/'+$routeParams.id,
 				headers : {
-					'Content-Type' : 'multipart/form-data'
+					'Content-Type' : undefined
 				},
 				data : {
 					vxf: angular.toJson( $scope.vxf, false ),					
@@ -2162,7 +2162,7 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
     			method : 'POST',
     			url : APIEndPointService.APIURL+'register/',
     			headers : {
-    				'Content-Type' : 'multipart/form-data'
+    				'Content-Type' : undefined
     			},
     			data : {
     				portaluser: angular.toJson( $scope.portaluser, false ),
@@ -2397,7 +2397,7 @@ appControllers.controller('RegisterConfigController', ['$scope', '$route', '$rou
 		method : 'POST',
 		url : APIEndPointService.APIURL+'register/verify',
 		headers : {
-			'Content-Type' : 'multipart/form-data'
+			'Content-Type' : undefined
 		},
 		data : {
 			username: $routeParams.uname,
@@ -2613,7 +2613,7 @@ appControllers.controller('VFImageUploadController', function($scope, $location,
 			method : 'POST',
 			url : APIEndPointService.APIURL+'admin/vfimages/',
 			headers : {
-				'Content-Type' : 'multipart/form-data'
+				'Content-Type' : undefined
 			},
 			data : {
 				vfimage: angular.toJson( $scope.vfimage, false ),
@@ -2650,7 +2650,7 @@ appControllers.controller('VFImageEditController', function($scope, $location, $
 			method : 'PUT',
 			url : APIEndPointService.APIURL+'admin/vfimages/',
 			headers : {
-				'Content-Type' : 'multipart/form-data'
+				'Content-Type' : undefined
 			},
 			data : {
 				vfimage: angular.toJson( $scope.vfimage, false ),
