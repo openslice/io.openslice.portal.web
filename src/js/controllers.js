@@ -366,7 +366,7 @@ appControllers.controller('ExperimentAddController', function($scope, $location,
 		}).then(function(response) {
 			$location.path("/experiments");
 		}, function errorCallback(response) {
-            alert( response.statusText + "Experiment Addition - Failed to read uploaded archive! " + response.data["message"]  );
+            alert( response.status + "Experiment Addition - Failed to read uploaded archive! " + response.data["message"]  );
         }); 	
 
 	};
@@ -2146,12 +2146,8 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
     
     $scope.registerNewPortalUser=function(){
         	
-        	randomid= 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        	    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-        	    return v.toString(16);
-        	});
-        	
-        	link = APIEndPointService.WEBURL+'/#!/registerconfirm?rid='+randomid+'&uname='+$scope.portaluser.username;
+        	        	
+        	link = APIEndPointService.WEBURL+'/#!/registerconfirm?rid=APIKEY_REPLACE&uname='+$scope.portaluser.username;
             msg='Dear '+$scope.portaluser.name+' <br>thank you for registering an account!<br><br>\r\n'+
             'Please follow this link:<br> '+link+
             ' <br> or copy it to your web browser\r\n'+
@@ -2160,7 +2156,7 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
         	
         	return $http({
     			method : 'POST',
-    			url : APIEndPointService.APIURL+'register/',
+    			url : APIEndPointService.APIURL+'register',
     			headers : {
     				'Content-Type' : undefined
     			},
@@ -2179,8 +2175,8 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
     			alert("A confirmation email has been sent in order to activate your account.");
     			$location.path("/");
     		},
-	        function errorCallback(error) {
-	            alert( "Failed to register new user! Username or email already exists! " + error.data ); //+ error.data
+	        function errorCallback(response) {
+	            alert( response.statusText +  "Failed to register new user! Username or email already exists! " + response.data["message"] ); //+ error.data
 	        }); 
         	
         };
@@ -2410,7 +2406,7 @@ appControllers.controller('RegisterConfigController', ['$scope', '$route', '$rou
 
 	},
     function error (response) {
-        alert("Error occured: "+response.status);
+        alert(response.status +  "Error occured: " + response.data["message"]);
     }); 	 
 	
     
