@@ -2,7 +2,7 @@ var appServices = angular.module('portalapp.services',[]);
 
 //PortalUser Resource
 appServices.factory('PortalUser', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/users/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/users/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -13,7 +13,7 @@ appServices.factory('PortalUser', function($resource, APIEndPointService) {
 
 //MentorUser Resource
 appServices.factory('MentorUser', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/users/mentors/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/users/mentors/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -23,7 +23,7 @@ appServices.factory('MentorUser', function($resource, APIEndPointService) {
 })
 
 appServices.factory('SessionService', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"sessions/");
+	return $resource(APIEndPointService.APIURL+"/osapi/sessions/");
 });
 
 
@@ -56,7 +56,7 @@ appServices.factory('formDataObject', function() {
 
 //SubscribedResource Resource
 appServices.factory('SubscribedResource', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/subscribedresources/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/subscribedresources/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -68,7 +68,7 @@ appServices.factory('SubscribedResource', function($resource, APIEndPointService
 
 //Category Resource
 appServices.factory('AdminCategory', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/categories/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/categories/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -80,7 +80,7 @@ appServices.factory('AdminCategory', function($resource, APIEndPointService) {
 
 //Category Resource
 appServices.factory('Category', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"categories/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/categories/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -92,7 +92,7 @@ appServices.factory('Category', function($resource, APIEndPointService) {
 //experiments Resource
 appServices.factory('ExperimentMetadata', function($resource, APIEndPointService) {
 	
-	return $resource(APIEndPointService.APIURL+"experiments/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/experiments/:id", 
 			{ id: '@id' }, {				
 		
 		    update: {
@@ -106,7 +106,7 @@ appServices.factory('ExperimentMetadata', function($resource, APIEndPointService
 //Admin experiments Resource
 appServices.factory('AdminExperimentMetadata', function($resource, APIEndPointService) {
 	
-	return $resource(APIEndPointService.APIURL+"admin/experiments/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/experiments/:id", 
 			{ id: '@id' }, {				
 		
 		    update: {
@@ -121,7 +121,7 @@ appServices.factory('AdminExperimentMetadata', function($resource, APIEndPointSe
 //experiments Resource
 appServices.factory('DeployableExperimentMetadata', function($resource, APIEndPointService) {
 	
-	return $resource(APIEndPointService.APIURL+"admin/experiments/deployable", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/experiments/deployable", 
 			{ id: '@id' }, {				
 		
 		    update: {
@@ -208,7 +208,7 @@ appServices.factory('DeployArtifact', function() {
 
 //DeploymentDescriptor Resource
 appServices.factory('DeploymentDescriptor', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/deployments/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/deployments/:id", 
 		{id : "@id"	}, {
 		"update" : {
 			method : "PUT"
@@ -237,7 +237,7 @@ appServices.factory('formDataObject', function() {
 
 
 appServices.factory('VxFMetadata', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"vxfs/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/vxfs/:id", 
 		{id : "@id"	}, {
 		"update" : {
 			method : "PUT"
@@ -247,7 +247,7 @@ appServices.factory('VxFMetadata', function($resource, APIEndPointService) {
 });
 
 appServices.factory('AdminVxFMetadata', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/vxfs/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/vxfs/:id", 
 		{id : "@id"	}, {
 		"update" : {
 			method : "PUT"
@@ -282,7 +282,7 @@ appServices.factory('FIWAREServers', function($resource, APIEndPointService) {
 
 //MANO platform Resource
 appServices.factory('AdminMANOplatform', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/manoplatforms/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/manoplatforms/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -294,7 +294,7 @@ appServices.factory('AdminMANOplatform', function($resource, APIEndPointService)
 
 //MANO provider Resource
 appServices.factory('AdminMANOprovider', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/manoproviders/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/manoproviders/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -306,7 +306,7 @@ appServices.factory('AdminMANOprovider', function($resource, APIEndPointService)
 
 appServices.factory('VxFOnBoardedDescriptor', function($resource, APIEndPointService) {
 	console.log(" =====> IN appServices.factory('VxFOnBoardedDescriptor' <=========");
-	return $resource(APIEndPointService.APIURL+"admin/vxfobds/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/vxfobds/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -317,7 +317,7 @@ appServices.factory('VxFOnBoardedDescriptor', function($resource, APIEndPointSer
 
 appServices.factory('ExperimentOnBoardDescriptor', function($resource, APIEndPointService) {
 	console.log(" =====> IN appServices.factory('ExperimentOnBoardDescriptor' <=========");
-	return $resource(APIEndPointService.APIURL+"admin/experimentobds/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/experimentobds/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -329,7 +329,7 @@ appServices.factory('ExperimentOnBoardDescriptor', function($resource, APIEndPoi
 
 //Property Resource
 appServices.factory('PortalProperty', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/properties/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/properties/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -342,7 +342,7 @@ appServices.factory('PortalProperty', function($resource, APIEndPointService) {
 
 //Infrastructure
 appServices.factory('Infrastructure', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/infrastructures/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/infrastructures/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request
@@ -356,7 +356,7 @@ appServices.factory('Infrastructure', function($resource, APIEndPointService) {
 
 //Infrastructure
 appServices.factory('VFImage', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"admin/vfimages/:id", 
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/vfimages/:id", 
 			{ id: '@id' }, {
 	    update: {
 	        method: 'PUT' // this method issues a PUT request

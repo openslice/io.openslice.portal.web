@@ -454,7 +454,7 @@ app.factory("authenticationSvc", ["$http","$q","$window","$rootScope", "$log", "
     function login(userName, password) {
         var deferred = $q.defer();
         $log.debug('========== > authenticationSvc Login');
-        $http.post(APIEndPointService.APIURL+"sessions/", { username: userName, password: password })
+        $http.post(APIEndPointService.APIURL+"/osapi/sessions/", { username: userName, password: password })
             .then(function (result) {
                 userInfo = {
                     accesstoken: "NOTIMPLEMENTED",//result.data.access_token,
@@ -476,7 +476,7 @@ app.factory("authenticationSvc", ["$http","$q","$window","$rootScope", "$log", "
 
         $http({
             method: "GET",
-            url: APIEndPointService.APIURL+"sessions/logout",
+            url: APIEndPointService.APIURL+"/osapi/sessions/logout",
             headers: {
                 //"access_token": "NOT_IMPLEMENTED"//userInfo.accessToken
             }

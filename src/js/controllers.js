@@ -1,8 +1,8 @@
 var appControllers = angular.module('portalapp.controllers',[ 'ngAnimate', 'ngSanitize', 'ngMaterial', 'ngMessages']) 
 
 
-appControllers.controller('FeaturedApps', ['$scope','$window','$log', 'ExperimentMetadata', 'Category', '$filter',
-                                                     	function($scope, $window, $log, ExperimentMetadata, Category,$filter ) {
+appControllers.controller('FeaturedApps', ['$scope','$window','$log', 'ExperimentMetadata', 'Category', '$filter', 'APIEndPointService', 
+                                                     	function($scope, $window, $log, ExperimentMetadata, Category,$filter , APIEndPointService) {
                          	
         	var orderBy = $filter('orderBy');
          	$scope.apps = ExperimentMetadata.query(function() {
@@ -14,6 +14,8 @@ appControllers.controller('FeaturedApps', ['$scope','$window','$log', 'Experimen
         		    	if ( app.iconsrc.indexOf( 'unknown' ) !== -1 ){
         		    		app.iconsrc = "images/experiment.png";
         			  		console.log("app.iconsrc = " + app.iconsrc);
+        			  	  }else {
+        				  		app.iconsrc = APIEndPointService.APIURL + app.iconsrc;
         			  	  }
         		    	
         				});
@@ -262,8 +264,8 @@ appControllers.controller('SubscribedResourceEditController', ['$scope', '$route
 //experiments controller
 
 
-appControllers.controller('ExperimentListController', ['$scope','$window','$log', 'AdminExperimentMetadata', 'popupService','ngDialog',
-                                             	function($scope, $window, $log, AdminExperimentMetadata, popupService, ngDialog ) {
+appControllers.controller('ExperimentListController', ['$scope','$window','$log', 'AdminExperimentMetadata', 'popupService','ngDialog', 'APIEndPointService',
+                                             	function($scope, $window, $log, AdminExperimentMetadata, popupService, ngDialog, APIEndPointService ) {
                  	
                  	
 
@@ -273,7 +275,11 @@ appControllers.controller('ExperimentListController', ['$scope','$window','$log'
 	 			if ( app.iconsrc.indexOf( 'unknown' ) !== -1 ){
 		    		app.iconsrc = "images/experiment.png";
 			  		console.log("app.iconsrc = " + app.iconsrc);
+			  	  } else {
+			  		app.iconsrc = APIEndPointService.APIURL + app.iconsrc;
 			  	  }
+
+	 			app.packageLocation = APIEndPointService.APIURL + app.packageLocation;
 	 		});
 
  		  }); //query() returns all the subscribedresources
@@ -347,7 +353,7 @@ appControllers.controller('ExperimentAddController', function($scope, $location,
 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'admin/experiments/',
+			url : APIEndPointService.APIURL+'/osapi/admin/experiments/',
 			headers : {
 				'Content-Type' : undefined
 			},
@@ -403,7 +409,7 @@ appControllers.controller('ExperimentUploadController', function($scope, $locati
 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'admin/experiments/',
+			url : APIEndPointService.APIURL+'/osapi/admin/experiments/',
 			headers : {
 				'Content-Type' : undefined
 			},
@@ -548,7 +554,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 
         return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'admin/experimentobds/',
+			url : APIEndPointService.APIURL+'/osapi/admin/experimentobds/',
 			headers : {
 				'Content-Type' : 'application/json'
 			},
@@ -627,7 +633,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 
 	        return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'admin/experimentobds/'+ eOnBoardedDescriptor.id +'/onboard',
+				url : APIEndPointService.APIURL+'aosapi/dmin/experimentobds/'+ eOnBoardedDescriptor.id +'/onboard',
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -682,7 +688,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 	  	    	  //here make a get
 		  	        return $http({
 		  				method : 'GET',
-		  				url : APIEndPointService.APIURL+'admin/experimentobds/'+ eOnBoardedDescriptor.id +'/status',
+		  				url : APIEndPointService.APIURL+'/osapi/admin/experimentobds/'+ eOnBoardedDescriptor.id +'/status',
 		  				headers : {
 		  					'Content-Type' : 'application/json'
 		  				},
@@ -725,7 +731,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 
 		        return $http({
 					method : 'PUT',
-					url : APIEndPointService.APIURL+'admin/experimentobds/'+ eOnBoardedDescriptor.id +'/offboard',
+					url : APIEndPointService.APIURL+'/osapi/admin/experimentobds/'+ eOnBoardedDescriptor.id +'/offboard',
 					headers : {
 						'Content-Type' : 'application/json'
 					},
@@ -765,7 +771,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 		 		 
 			return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'admin/experiments/'+$routeParams.id,
+				url : APIEndPointService.APIURL+'/osapi/admin/experiments/'+$routeParams.id,
 				headers : {
 					'Content-Type' : undefined
 				},
@@ -884,8 +890,8 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 }]);
 
 
-appControllers.controller('ExperimentViewController', ['$scope', '$route', '$routeParams', '$location', 'ExperimentMetadata',
-                                                 function( $scope, $route, $routeParams, $location, ExperimentMetadata ){
+appControllers.controller('ExperimentViewController', ['$scope', '$route', '$routeParams', '$location', 'ExperimentMetadata', 'APIEndPointService',
+                                                 function( $scope, $route, $routeParams, $location, ExperimentMetadata,APIEndPointService ){
     $scope.exprm = ExperimentMetadata.get({id:$routeParams.id}, function() {
 
   	  $scope.tabs = [
@@ -900,6 +906,9 @@ appControllers.controller('ExperimentViewController', ['$scope', '$route', '$rou
   	  if ( $scope.exprm.iconsrc.indexOf( 'unknown' ) !== -1 ){
   		$scope.exprm.iconsrc = "images/experiment.png";
   		console.log("$scope.exprm.iconsrc = " + $scope.exprm.iconsrc);
+  	  }else{
+  		$scope.exprm.iconsrc = APIEndPointService.APIURL + $scope.exprm.iconsrc;
+  		$scope.exprm.packageLocation = APIEndPointService.APIURL + $scope.exprm.packageLocation;
   	  }
   	
   	
@@ -987,8 +996,8 @@ appControllers.controller('CategoryEditController', ['$scope', '$route', '$route
 //experiments controller
 
 
-appControllers.controller('ExperimentsMarketplaceController', ['$scope','$window','$log', 'ExperimentMetadata', 'Category', '$filter',
-                                             	function($scope, $window, $log, ExperimentMetadata, Category,$filter ) {
+appControllers.controller('ExperimentsMarketplaceController', ['$scope','$window','$log', 'ExperimentMetadata', 'Category', '$filter', 'APIEndPointService',
+                                             	function($scope, $window, $log, ExperimentMetadata, Category,$filter, APIEndPointService ) {
                  	
 	var orderBy = $filter('orderBy');
 	$scope.categories = Category.query(function() {
@@ -1004,7 +1013,9 @@ appControllers.controller('ExperimentsMarketplaceController', ['$scope','$window
 		    	if ( app.iconsrc.indexOf( 'unknown' ) !== -1 ){
 		    		app.iconsrc = "images/experiment.png";
 			  		console.log("app.iconsrc = " + app.iconsrc);
-			  	  }
+			  	  } else {
+			  		app.iconsrc = APIEndPointService.APIURL + app.iconsrc;
+			  	  } 
 		    	
 				});
 		    
@@ -1049,8 +1060,8 @@ appControllers.controller('ExperimentsMarketplaceController', ['$scope','$window
 
 
 
-appControllers.controller('VxFListController', ['$scope','$window','$log', 'AdminVxFMetadata', 'popupService','ngDialog',
-                                             	function($scope, $window, $log, AdminVxFMetadata, popupService, ngDialog ) {
+appControllers.controller('VxFListController', ['$scope','$window','$log', 'AdminVxFMetadata', 'popupService','ngDialog', 'APIEndPointService',
+                                             	function($scope, $window, $log, AdminVxFMetadata, popupService, ngDialog, APIEndPointService ) {
                  	
                  	
  	$scope.vxfs= AdminVxFMetadata.query(function() {
@@ -1058,7 +1069,13 @@ appControllers.controller('VxFListController', ['$scope','$window','$log', 'Admi
 	    		
 	 			if ( vxf.iconsrc.indexOf( 'unknown' ) !== -1 ){
 	 				vxf.iconsrc = "images/vxf.png";
-			  	  }
+			  	  } else
+			  {
+			  		vxf.iconsrc = APIEndPointService.APIURL + vxf.iconsrc;
+			  }
+	 			
+	 			vxf.packageLocation = APIEndPointService.APIURL + vxf.packageLocation;
+	 			
 	 		});
  		  }); //query() returns all the subscribedresources
  		 
@@ -1136,7 +1153,7 @@ appControllers.controller('VxFAddController', function($scope, $location,
 		 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'admin/vxfs/',
+			url : APIEndPointService.APIURL+'/osapi/admin/vxfs/',
 			headers : {
 				'Content-Type' : undefined
 			},
@@ -1189,7 +1206,7 @@ appControllers.controller('VxFUploadController', function($scope, $location,
 		 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'admin/vxfs',
+			url : APIEndPointService.APIURL+'/osapi/admin/vxfs',
 			headers : {
 				'Content-Type' :  undefined
 			},
@@ -1262,7 +1279,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 
 	        return $http({
 				method : 'POST',
-				url : APIEndPointService.APIURL+'admin/vxfobds/',
+				url : APIEndPointService.APIURL+'/osapi/admin/vxfobds/',
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -1317,7 +1334,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 
 	        return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/onboard',
+				url : APIEndPointService.APIURL+'/osapi/admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/onboard',
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -1373,7 +1390,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 	  	    	  //here make a get
 		  	        return $http({
 		  				method : 'GET',
-		  				url : APIEndPointService.APIURL+'admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/status',
+		  				url : APIEndPointService.APIURL+'/osapi/admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/status',
 		  				headers : {
 		  					'Content-Type' : 'application/json'
 		  				},
@@ -1421,7 +1438,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 
 		        return $http({
 					method : 'PUT',
-					url : APIEndPointService.APIURL+'admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/offboard',
+					url : APIEndPointService.APIURL+'/osapi/admin/vxfobds/'+ avxfOnBoardedDescriptor.id +'/offboard',
 					headers : {
 						'Content-Type' : 'application/json'
 					},
@@ -1461,7 +1478,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 		 		 
 			return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'admin/vxfs/'+$routeParams.id,
+				url : APIEndPointService.APIURL+'/osapi/admin/vxfs/'+$routeParams.id,
 				headers : {
 					'Content-Type' : undefined
 				},
@@ -1598,8 +1615,8 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 }]);
 
 
-appControllers.controller('VxFViewController', ['$scope', '$route', '$routeParams', '$location', 'VxFMetadata',
-                                                 function( $scope, $route, $routeParams, $location, VxFMetadata ){
+appControllers.controller('VxFViewController', ['$scope', '$route', '$routeParams', '$location', 'VxFMetadata', 'APIEndPointService',
+                                                 function( $scope, $route, $routeParams, $location, VxFMetadata, APIEndPointService ){
     $scope.vxf=VxFMetadata.get({id:$routeParams.id}, function() {    		
     	
     	  $scope.tabs = [
@@ -1615,6 +1632,8 @@ appControllers.controller('VxFViewController', ['$scope', '$route', '$routeParam
     	if ( v.iconsrc.indexOf( 'unknown' ) !== -1 ){
     		v.iconsrc = "images/vxf.png";
 	  		console.log("v.iconsrc = " + v.iconsrc);
+	  	  } else {
+	  		v.iconsrc = APIEndPointService.APIURL +v.iconsrc;
 	  	  }
 		    	
 				
@@ -1634,8 +1653,8 @@ appControllers.controller('VxFViewController', ['$scope', '$route', '$routeParam
 }]);
 
 
-appControllers.controller('VxFsMarketplaceController', ['$scope','$window','$log', 'VxFMetadata', 'Category', '$filter',
-                                                     	function($scope, $window, $log, VxFMetadata, Category,$filter ) {
+appControllers.controller('VxFsMarketplaceController', ['$scope','$window','$log', 'VxFMetadata', 'Category', '$filter', 'APIEndPointService',
+                                                     	function($scope, $window, $log, VxFMetadata, Category,$filter, APIEndPointService ) {
                          	
 	console.log("IN VxFsMarketplaceController");
         	var orderBy = $filter('orderBy');
@@ -1652,6 +1671,8 @@ appControllers.controller('VxFsMarketplaceController', ['$scope','$window','$log
         		    	if ( v.iconsrc.indexOf( 'unknown' ) !== -1 ){
         		    		v.iconsrc = "images/vxf.png";
         			  		console.log("v.iconsrc = " + v.iconsrc);
+        			  	  }else {
+        			  		v.iconsrc = APIEndPointService.APIURL + v.iconsrc;
         			  	  }
         		    	
         				});
@@ -1741,7 +1762,7 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
  	 function mydeployments() {
 		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'admin/deployments/user' ,
+			url : APIEndPointService.APIURL+'/osapi/admin/deployments/user' ,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -1764,7 +1785,7 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
 	$scope.showCompletedDeployments = function () {
 		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'admin/deployments/user?status=COMPLETED' ,
+			url : APIEndPointService.APIURL+'/osapi/admin/deployments/user?status=COMPLETED' ,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -1779,7 +1800,7 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
  	$scope.showRejectedDeployments = function () {
  		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'admin/deployments/user?status=REJECTED' ,
+			url : APIEndPointService.APIURL+'/osapi/admin/deployments/user?status=REJECTED' ,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -1794,7 +1815,7 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
  	$scope.showFailedDeployments = function () {
  		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'admin/deployments/user?status=FAILED_OSM_REMOVED' ,
+			url : APIEndPointService.APIURL+'/osapi/admin/deployments/user?status=FAILED_OSM_REMOVED' ,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -1905,7 +1926,7 @@ appControllers.controller('DeploymentAddController', ['$scope', '$route', '$root
 		
     	return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'admin/deployments/',
+			url : APIEndPointService.APIURL+'/osapi/admin/deployments/',
 			headers : {
 				'Content-Type' : 'application/json'
 			},
@@ -1993,7 +2014,7 @@ appControllers.controller('DeploymentsAdminListController', ['$scope','$window',
 	 		
 	 		return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'admin/deployments/'+depidx+'?action='+action,
+				url : APIEndPointService.APIURL+'/osapi/admin/deployments/'+depidx+'?action='+action,
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -2116,7 +2137,7 @@ appControllers.controller('DeploymentEditController', ['$scope', '$route', '$roo
 	        
 	        return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'admin/deployments/'+$scope.adeployment.id,
+				url : APIEndPointService.APIURL+'/osapi/admin/deployments/'+$scope.adeployment.id,
 				headers : {
 					'Content-Type' : 'application/json'
 				},
@@ -2156,7 +2177,7 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
         	
         	return $http({
     			method : 'POST',
-    			url : APIEndPointService.APIURL+'register',
+    			url : APIEndPointService.APIURL+'/osapi/register',
     			headers : {
     				'Content-Type' : undefined
     			},
@@ -2391,7 +2412,7 @@ appControllers.controller('RegisterConfigController', ['$scope', '$route', '$rou
 	
 	return $http({
 		method : 'POST',
-		url : APIEndPointService.APIURL+'register/verify',
+		url : APIEndPointService.APIURL+'/osapi/register/verify',
 		headers : {
 			'Content-Type' : undefined
 		},
@@ -2514,7 +2535,7 @@ appControllers.controller('InfrastructureAddImageController',['$scope', '$route'
 		 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'admin/infrastructures/' + $scope.portalinfrastructure.id + '/images/' + $scope.vfselectedimage.id
+			url : APIEndPointService.APIURL+'/osapi/admin/infrastructures/' + $scope.portalinfrastructure.id + '/images/' + $scope.vfselectedimage.id
 		}).then(function( response ) {
 			$location.path("/edit_infrastructure/" + $scope.portalinfrastructure.id );
 		}, function errorCallback(response) {
@@ -2587,7 +2608,7 @@ appControllers.controller('VFImageUploadController', function($scope, $location,
 	$scope.checkVFImageName = function checkName() {
 		return $http({
 			method : 'GET',
-			url : APIEndPointService.APIURL+'admin/vfimages/name/' + $scope.vfimage.name,
+			url : APIEndPointService.APIURL+'/osapi/admin/vfimages/name/' + $scope.vfimage.name,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -2607,7 +2628,7 @@ appControllers.controller('VFImageUploadController', function($scope, $location,
 		 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'admin/vfimages/',
+			url : APIEndPointService.APIURL+'/osapi/admin/vfimages/',
 			headers : {
 				'Content-Type' : undefined
 			},
@@ -2644,7 +2665,7 @@ appControllers.controller('VFImageEditController', function($scope, $location, $
 		 
 		return $http({
 			method : 'PUT',
-			url : APIEndPointService.APIURL+'admin/vfimages/',
+			url : APIEndPointService.APIURL+'/osapi/admin/vfimages/',
 			headers : {
 				'Content-Type' : undefined
 			},
