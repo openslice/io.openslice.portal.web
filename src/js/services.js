@@ -256,29 +256,6 @@ appServices.factory('AdminVxFMetadata', function($resource, APIEndPointService) 
 	});
 });
 
-//ComputeEndpoint
-appServices.factory('ComputeEndpoint', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"fiware/computeendpoints", 
-		{id : "@id"	}, {
-		"update" : {
-			method : "PUT"
-		}
-
-	});
-});
-
-//FIWAREServers
-appServices.factory('FIWAREServers', function($resource, APIEndPointService) {
-	return $resource(APIEndPointService.APIURL+"fiware/servers", 
-		{id : "@id"	}, {
-		"update" : {
-			method : "PUT"
-		}
-
-	});
-});
-
-
 
 //MANO platform Resource
 appServices.factory('AdminMANOplatform', function($resource, APIEndPointService) {

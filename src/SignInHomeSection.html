@@ -20,7 +20,7 @@
 				<p >Use the following fields to sign in {{portalName}}</p>
 				<div class="alert alert-danger" ng-show="loginError">Username and/or Password Incorrect</div>
   
-				<form ng-submit="login()">
+				<form ng-submit="loginauth()">
 					<div  class="form-group">
 						<input class="form-control" type="text" ng-model='user.username' placeholder="username" />
 					</div>
@@ -31,6 +31,7 @@
 					 <button type="submit" class="btn btn-default">Sign In</button> or <a style="color: white;" href="#!/signup" ><b>Sign up</b> for the {{portalName}}!</a>
 					
 				</form>
+				
 				
 				<!-- 
 				<h4>..or sign-in with</h4>
