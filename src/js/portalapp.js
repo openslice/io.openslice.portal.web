@@ -346,7 +346,10 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
 		                $cookies.put("access_token", data.data.access_token, {'expires': expireDate});
 		                $cookies.put("validity", data.data.expires_in);
 		                
-						Edw prepei na parei ton swsto xristi
+						1) Edw prepei na parei ton swsto xristi
+						2)Na min kanei panta OAuth Approval alla mono mia fora 
+						3)Implement logout
+						
 		                $rootScope.loggedinportaluser = PortalUser.get({id:1});
 		                
 		    			$rootScope.loggedIn = true;
