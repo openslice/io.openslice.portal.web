@@ -232,80 +232,7 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
     $rootScope.healthstatus = APIEndPointService.STATUS;
     $rootScope.weburl = APIEndPointService.WEBURL;
     	
-    $scope.login = function () {
-        authenticationSvc.login($scope.user.username, $scope.user.password)
-            .then(function (result) {
-    			$rootScope.loggedIn = true;
-                $scope.userInfo = result;
-                $rootScope.loggedinportaluser = $scope.userInfo.portalUser;
-
-        		$log.debug('========== > inside LoginCtrl controller $rootScope.portaluser ='+ $rootScope.loggedinportaluser);
-        		$log.debug('========== > inside LoginCtrl controller $rootScope.portaluser ='+ $rootScope.loggedinportaluser.username);
-                
-                $location.path("/experiments_marketplace");
-            }, function (error) {
-                //$window.alert("Invalid credentials");
-    			$scope.loginError = true;
-    			$log.debug(error);
-            });
-    };
-
-    $scope.cancel = function () {
-        $scope.user.userName = "";
-        $scope.user.password = "";
-    };
-    
-    $scope.loginData = {grant_type:"password", username: "", password: "", client_id: "fooClientIdPassword"}
-    $scope.loginauth = function() {   
-    	$scope.loginData.username =  $scope.user.username;
-    	$scope.loginData.password =  $scope.user.password;
-        obtainAccessToken($scope.loginData);
-   }
-    
-    function obtainAccessToken(params){
-        if (params.username != null){
-            if (params.remember != null){
-                $cookies.put("remember","yes");
-            }
-            else {
-                $cookies.remove("remember");
-            }
-        }
-	
-        var req = {
-            method: 'POST',
-            url: "http://localhost:13081/osapi-oauth-server/oauth/token",
-            headers: {"Content-type": "application/x-www-form-urlencoded; charset=utf-8", "Authorization": "Basic Zm9vQ2xpZW50SWRQYXNzd29yZDpzZWNyZXQ="},
-            data: $httpParamSerializer(params)
-        }
-        $http(req).then(
-            function(data){
-                $http.defaults.headers.common.Authorization= 'Bearer ' + data.data.access_token;
-                var expireDate = new Date (new Date().getTime() + (1000 * data.data.expires_in));
-                $cookies.put("access_token", data.data.access_token, {'expires': expireDate});
-                $cookies.put("validity", data.data.expires_in);
-                
-
-                $rootScope.loggedinportaluser = PortalUser.get({id:1});
-                
-    			$rootScope.loggedIn = true;
-                var anuserInfo = {
-		                    accesstoken: data.data.access_token,
-		                    username: $scope.user.username,
-		                    portalUser: $rootScope.loggedinportaluser,
-		          };
-                $scope.userInfo = anuserInfo;
-
-        		$log.debug('========== > inside LoginCtrl controller $rootScope.portaluser ='+ $rootScope.loggedinportaluser);
-        		$log.debug('========== > inside LoginCtrl controller $rootScope.portaluser ='+ $rootScope.loggedinportaluser.username);
-                
-                $location.path("/experiments_marketplace");
-            },function(){
-                console.log("error");
-                window.location.href = "index.html#!/login";
-            }
-        );
-    }
+  
     
   
     $scope.showOauth2OsapiPopup = function showPopup(){
@@ -313,7 +240,7 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
 		 var jsession = $cookieStore.get('JSESSIONID');
 		 $log.debug('========== > COOKIES jsession= '+  jsession);
 		 
-		 popup = $window.open('http://localhost:13081/osapi-oauth-server/oauth/authorize?client_id=fooClientIdPassword&response_type=code&redirect_uri=http://localhost:13000/osapi/testweb/oauthresp.html', '_blank' ,  "width=1024,height=500");
+		 popup = $window.open('http://localhost:13081/osapi-oauth-server/oauth/authorize?client_id=osapiWebClientId&response_type=code&redirect_uri=http://localhost:13000/osapi/testweb/oauthresp.html', '_blank' ,  "width=1024,height=500");
 		 
 	    	    // center the popup window
 	    //var left = screen.width/2 - 200
@@ -335,7 +262,7 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
             	var req = {
 		            method: 'POST',
 		            url: "http://localhost:13081/osapi-oauth-server/oauth/token",
-            		headers: {"Content-type": "application/x-www-form-urlencoded; charset=utf-8", "Authorization": "Basic Zm9vQ2xpZW50SWRQYXNzd29yZDpzZWNyZXQ="},
+            		headers: {"Content-type": "application/x-www-form-urlencoded; charset=utf-8", "Authorization": "Basic b3NhcGlXZWJDbGllbnRJZDpzZWNyZXQ="},
 		            data: $httpParamSerializer(params)
 		        }
 		        
@@ -346,11 +273,11 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
 		                $cookies.put("access_token", data.data.access_token, {'expires': expireDate});
 		                $cookies.put("validity", data.data.expires_in);
 		                
-						1) Edw prepei na parei ton swsto xristi
-						2)Na min kanei panta OAuth Approval alla mono mia fora 
-						3)Implement logout
-						
-		                $rootScope.loggedinportaluser = PortalUser.get({id:1});
+						//1) Edw prepei na parei ton swsto xristi
+						//2)Na min kanei panta OAuth Approval alla mono mia fora 
+						//3)Implement logout
+
+		                $rootScope.loggedinportaluser = PortalUser.myuser();
 		                
 		    			$rootScope.loggedIn = true;
 		                var anuserInfo = {
@@ -372,90 +299,7 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
 		}
     
     
-    $scope.showOauth2FIWAREPopup = function showPopup(){
-
-		 var jsession = $cookieStore.get('JSESSIONID');
-		 $log.debug('========== > COOKIES jsession= '+  jsession);
-		 
-	    	    // center the popup window
-	    var left = screen.width/2 - 200
-	        , top = screen.height/2 - 250
-	        , popup = $window.open(APIEndPointService.APIURL+'oauth2', '', "top=" + top + ",left=" + left + ",width=1024,height=500")
-	        , interval = 1000;
-
-
-		 var receiveMessage =(function (event) //this one is a callback from the popup.Portal REST returns an HTML page that we can communicate via POST message
-		 {
-			   // event.source is popup
-			   // event.data is the jspn object
-			 var popup = event.source;
-			 
-			 $log.debug('========== > insidereceiveMessage popup= '+  event.data);
-			 var session= event.data;
-			 if (session.indexOf("username")>=0 ){
-		        	
-		          $interval.cancel(i);
-		          popup.close();
-		          var sessionObj = JSON.parse(session);
-		          var userInfo = {
-		                    accesstoken: "NOTIMPLEMENTED",
-		                    username: sessionObj.username,
-		                    portalUser: sessionObj.portalUser,
-		                    fiwareuser: sessionObj.fiwareuser,
-		          };
-		          $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
-		          $rootScope.loggedIn = true;
-	              $scope.userInfo = userInfo;
-	              $rootScope.loggedinportaluser = $scope.userInfo.portalUser;
-	              $rootScope.loggedinfiwareuser = $scope.userInfo.fiwareuser;
-	              $rootScope.xAuthTokenKey = userInfo.xAuthTokenKey;
-	              $rootScope.cloudAccessTokenKey = userInfo.cloudAccessTokenKey;
-	              
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.portaluser ='+ $rootScope.loggedinportaluser.username);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.xAuthTokenKey ='+ $rootScope.xAuthTokenKey);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.cloudAccessTokenKey ='+ $rootScope.cloudAccessTokenKey);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.loggedinfiwareuser.nickNamer ='+ $rootScope.loggedinfiwareuser.nickName);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.loggedinfiwareuser.xOAuth2Token ='+ $rootScope.loggedinfiwareuser.xOAuth2Token);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.loggedinfiwareuser.cloudToken ='+ $rootScope.loggedinfiwareuser.cloudToken);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.loggedinfiwareuser.tenantName ='+ $rootScope.loggedinfiwareuser.tenantName);
-	      			  
-
-	      			
-	              $location.path("/experiments_marketplace");
-	              
-	              
-		        }
-			 
-		 });
-		 
-		 window.addEventListener("message", receiveMessage, false);
-		 
-		 
-	    // create an ever increasing interval to check a certain global value getting assigned in the popup
-	    var i = $interval(function(){
-	      interval += 500;
-	      try {
-
-	    	  // This will successfully queue a message to be sent to the popup, assuming
-	    	  // the window hasn't changed its location.
-	    	  popup.postMessage("hello there!", "*");
-	    		 
-	    	  if( !popup.document ){ //when window closes without login
-	      			$interval.cancel(i);
-			        popup.close();
-			        return;
-	      		}
-	    	  
-	      		
-	      } catch(e){
-	        console.error(e);
-	      }
-	    }, interval);
-	    
-	    
-
-	  }
-    
+        
     
     
     
@@ -484,12 +328,15 @@ app.config(function($httpProvider) {
 	
 	$httpProvider.defaults.withCredentials = true; //good for CORS support
 	$httpProvider.interceptors.push(function($rootScope, $location, $q, $log,$window) {
+
+		$log.debug('========== > inside httpProvider.interceptors request!'  );
+		
 		return {
 			'request' : function(request) { // if we're not logged-in to the
 				// AngularJS app, redirect to // login
 				// page
 				$rootScope.loggedIn = $rootScope.loggedIn || $rootScope.username;
-				$log.debug('========== > inside httpProvider.interceptors request = ' + request.body );
+				$log.debug('========== > inside httpProvider.interceptors request = ' + request.url );
 				
 				if ($window.sessionStorage["userInfo"]!=null) {
 		            userInfo = JSON.parse($window.sessionStorage["userInfo"]);
@@ -548,9 +395,13 @@ app.config(function($httpProvider) {
 			'response' : function( response ) { 
 				// the web service,
 				//$log.debug('========== > response  ' + response );
-				//$log.debug('========== > response  response.status = ' + response.status  );
+				$log.debug('========== > response  response.status = ' + response.status  );
 				//$log.debug('========== > response  response.data = ' + response.data );
-				
+				if (response.status === 401 && $location.path() != '/login') {
+					$rootScope.loggedIn = false;
+		            $window.sessionStorage["userInfo"] = null;
+					$location.path('/login');
+				}
 				return response;
 				}
 		};
@@ -560,8 +411,8 @@ app.config(function($httpProvider) {
 
 
 
-app.factory("authenticationSvc", ["$http","$q","$window","$rootScope", "$log", "APIEndPointService", 
-                                  function ($http, $q, $window,$rootScope, $log, APIEndPointService) {
+app.factory("authenticationSvc", ["$http","$q","$window","$rootScope", "$log", "APIEndPointService", "$cookies", "$location",
+                                  function ($http, $q, $window,$rootScope, $log, APIEndPointService, $cookies, $location) {
     var userInfo;
 
 	$log.debug('========== > authenticationSvc');
@@ -589,26 +440,33 @@ app.factory("authenticationSvc", ["$http","$q","$window","$rootScope", "$log", "
     	$log.debug('========== > authenticationSvc logout' );
         var deferred = $q.defer();
 
-        $http({
-            method: "GET",
-            url: APIEndPointService.APIURL+"/osapi/sessions/logout",
-            headers: {
-                //"access_token": "NOT_IMPLEMENTED"//userInfo.accessToken
-            }
-        }).then(function (result) {
-        	$log.debug('========== > authenticationSvc logout RESET everything' );
-            userInfo = null;
-			$rootScope.loggedIn = false;
-            $window.sessionStorage["userInfo"] = null;
-            deferred.resolve(result);
-        }, function (error) {
-        	$log.debug('========== > authenticationSvc logout RESET everything from error' );
-            userInfo = null;
-			$rootScope.loggedIn = false;
-            $window.sessionStorage["userInfo"] = null;
-            deferred.reject(error);
-        });
+//        $http({
+//            method: "GET",
+//            url: APIEndPointService.APIURL+"/osapi/sessions/logout",
+//            headers: {
+//                //"access_token": "NOT_IMPLEMENTED"//userInfo.accessToken
+//            }
+//        }).then(function (result) {
+//        	$log.debug('========== > authenticationSvc logout RESET everything' );
+//            userInfo = null;
+//			$rootScope.loggedIn = false;
+//            $window.sessionStorage["userInfo"] = null;
+//            deferred.resolve(result);
+//        }, function (error) {
+//        	$log.debug('========== > authenticationSvc logout RESET everything from error' );
+//            userInfo = null;
+//			$rootScope.loggedIn = false;
+//            $window.sessionStorage["userInfo"] = null;
+//            deferred.reject(error);
+//        });
+        
 
+        $http.defaults.headers.common.Authorization= '';
+        $cookies.remove('access_token');
+        userInfo = null;
+		$rootScope.loggedIn = false;
+		$window.sessionStorage["userInfo"] = null;
+		$location.path('/login')
         return deferred.promise;
     }
 

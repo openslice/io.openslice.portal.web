@@ -2,11 +2,18 @@ var appServices = angular.module('portalapp.services',[]);
 
 //PortalUser Resource
 appServices.factory('PortalUser', function($resource, APIEndPointService) {
+	
+	
+	  
 	return $resource(APIEndPointService.APIURL+"/osapi/admin/users/:id", 
 			{ id: '@id' }, {
 	    update: {
-	        method: 'PUT' // this method issues a PUT request
-        	
+	        method: 'PUT' // this method issues a PUT request        	
+	      },
+	      myuser: {
+		        method: 'GET', // this method issues a PUT request
+		        url: APIEndPointService.APIURL+"/osapi/admin/users/myuser"
+	    	  
 	      }
 	});
 });

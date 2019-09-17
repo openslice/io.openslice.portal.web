@@ -32,9 +32,16 @@ appControllers.controller('UserListController', ['$scope','$window','$log', 'Por
 	
 	
 
-	$scope.portalusers = PortalUser.query(function() {
+	$scope.portalusers = PortalUser.query(
+			function( data ) {
 		    //console.log($scope.portalusers);
-		  }); //query() returns all the portalUsers
+		  }, //query() returns all the portalUsers
+	
+		    //When it fails
+		    function(error){
+		        
+		  }
+		  );
 		 
 	
 	

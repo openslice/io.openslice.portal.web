@@ -30,7 +30,7 @@
 							</ul>
 						</li>
 							
-						<li ng-show="loggedIn && ( ( loggedinportaluser.roles.indexOf('ROLE_EXPERIMENTER')>-1) )|| (loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1) || (loggedinportaluser.roles.indexOf('ROLE_VXF_DEVELOPER')>-1) || (loggedinportaluser.roles.indexOf('ROLE_MENTOR')>-1) || (loggedinportaluser.roles.indexOf('ROLE_TESTBED_PROVIDER')>-1) " class="dropdown">
+						<li ng-show="loggedIn" class="dropdown">
 							<a class="dropdown-toggle" href="" data-toggle="dropdown">Admin <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li ng-show="loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1" ><a href="#!/users">System Users</a></li>
