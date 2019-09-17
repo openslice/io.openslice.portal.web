@@ -158,8 +158,8 @@ app.config(function($routeProvider, $locationProvider, $anchorScrollProvider, cf
 	cfpLoadingBarProvider.includeSpinner = true;
 	cfpLoadingBarProvider.includeBar = true;
 	
-
 	
+    
 });
 
 
@@ -286,9 +286,15 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
                 $cookies.put("validity", data.data.expires_in);
                 
 
-    			$rootScope.loggedIn = true;
-                //$scope.userInfo = result;
                 $rootScope.loggedinportaluser = PortalUser.get({id:1});
+                
+    			$rootScope.loggedIn = true;
+                var anuserInfo = {
+		                    accesstoken: data.data.access_token,
+		                    username: $scope.user.username,
+		                    portalUser: $rootScope.loggedinportaluser,
+		          };
+                $scope.userInfo = anuserInfo;
 
         		$log.debug('========== > inside LoginCtrl controller $rootScope.portaluser ='+ $rootScope.loggedinportaluser);
         		$log.debug('========== > inside LoginCtrl controller $rootScope.portaluser ='+ $rootScope.loggedinportaluser.username);
@@ -307,84 +313,60 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
 		 var jsession = $cookieStore.get('JSESSIONID');
 		 $log.debug('========== > COOKIES jsession= '+  jsession);
 		 
+		 popup = $window.open('http://localhost:13081/osapi-oauth-server/oauth/authorize?client_id=fooClientIdPassword&response_type=code&redirect_uri=http://localhost:13000/osapi/testweb/oauthresp.html', '_blank' ,  "width=1024,height=500");
+		 
 	    	    // center the popup window
-	    var left = screen.width/2 - 200
-	        , top = screen.height/2 - 250
-	        , popup = $window.open(APIEndPointService.APIURL+'oauth2', '', "top=" + top + ",left=" + left + ",width=1024,height=500")
-	        , interval = 1000;
-
-
-		 var receiveMessage =(function (event) //this one is a callback from the popup.Portal REST returns an HTML page that we can communicate via POST message
-		 {
-			   // event.source is popup
-			   // event.data is the jspn object
-			 var popup = event.source;
-			 
-			 $log.debug('========== > insidereceiveMessage popup= '+  event.data);
-			 var session= event.data;
-			 if (session.indexOf("username")>=0 ){
-		        	
-		          $interval.cancel(i);
-		          popup.close();
-		          var sessionObj = JSON.parse(session);
-		          var userInfo = {
-		                    accesstoken: "NOTIMPLEMENTED",
-		                    username: sessionObj.username,
-		                    portalUser: sessionObj.portalUser,
-		                    fiwareuser: sessionObj.fiwareuser,
-		          };
-		          $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
-		          $rootScope.loggedIn = true;
-	              $scope.userInfo = userInfo;
-	              $rootScope.loggedinportaluser = $scope.userInfo.portalUser;
-	              $rootScope.loggedinfiwareuser = $scope.userInfo.fiwareuser;
-	              $rootScope.xAuthTokenKey = userInfo.xAuthTokenKey;
-	              $rootScope.cloudAccessTokenKey = userInfo.cloudAccessTokenKey;
-	              
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.portaluser ='+ $rootScope.loggedinportaluser.username);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.xAuthTokenKey ='+ $rootScope.xAuthTokenKey);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.cloudAccessTokenKey ='+ $rootScope.cloudAccessTokenKey);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.loggedinfiwareuser.nickNamer ='+ $rootScope.loggedinfiwareuser.nickName);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.loggedinfiwareuser.xOAuth2Token ='+ $rootScope.loggedinfiwareuser.xOAuth2Token);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.loggedinfiwareuser.cloudToken ='+ $rootScope.loggedinfiwareuser.cloudToken);
-	      			$log.debug('========== > inside LoginCtrl controllerinterval $rootScope.loggedinfiwareuser.tenantName ='+ $rootScope.loggedinfiwareuser.tenantName);
-	      			  
-
-	      			
-	              $location.path("/experiments_marketplace");
-	              
-	              
-		        }
-			 
-		 });
-		 
-		 window.addEventListener("message", receiveMessage, false);
-		 
-		 
-	    // create an ever increasing interval to check a certain global value getting assigned in the popup
-	    var i = $interval(function(){
-	      interval += 500;
-	      try {
-
-	    	  // This will successfully queue a message to be sent to the popup, assuming
-	    	  // the window hasn't changed its location.
-	    	  popup.postMessage("hello there!", "*");
-	    		 
-	    	  if( !popup.document ){ //when window closes without login
-	      			$interval.cancel(i);
-			        popup.close();
-			        return;
-	      		}
-	    	  
-	      		
-	      } catch(e){
-	        console.error(e);
-	      }
-	    }, interval);
-	    
-	    
+	    //var left = screen.width/2 - 200
+	    //    , top = screen.height/2 - 250
+	    //    , popup = $window.open('http://localhost:13081/osapi-oauth-server/oauth/authorize?client_id=fooClientIdPassword&response_type=code&redirect_uri=http://localhost:13000/osapi/testweb/oauthresp.html', '', "top=" + top + ",left=" + left + ",width=1024,height=500");
 
 	  }
+	  
+	  
+	 $window.fromauthwindow = function( url_string ){
+        		$log.debug('========== > inside LoginCtrl url_string ='+ url_string);
+        		$log.debug('========== > inside LoginCtrl window.locatio ='+ window.location.href);
+        		//$log.debug('========== > inside LoginCtrl window.opener ='+ window.opener.location.href);
+            	var url = new URL( url_string );
+            	var c = url.searchParams.get( 'code' );
+            	var params = {grant_type:"authorization_code", redirect_uri: "http://localhost:13000/osapi/testweb/oauthresp.html",  code: c }
+        		$log.debug('========== > inside LoginCtrl params ='+ params);
+        		
+            	var req = {
+		            method: 'POST',
+		            url: "http://localhost:13081/osapi-oauth-server/oauth/token",
+            		headers: {"Content-type": "application/x-www-form-urlencoded; charset=utf-8", "Authorization": "Basic Zm9vQ2xpZW50SWRQYXNzd29yZDpzZWNyZXQ="},
+		            data: $httpParamSerializer(params)
+		        }
+		        
+		        $http(req).then(
+		            function(data){
+		                $http.defaults.headers.common.Authorization= 'Bearer ' + data.data.access_token;
+		                var expireDate = new Date (new Date().getTime() + (1000 * data.data.expires_in));
+		                $cookies.put("access_token", data.data.access_token, {'expires': expireDate});
+		                $cookies.put("validity", data.data.expires_in);
+		                
+						Edw prepei na parei ton swsto xristi
+		                $rootScope.loggedinportaluser = PortalUser.get({id:1});
+		                
+		    			$rootScope.loggedIn = true;
+		                var anuserInfo = {
+				                    accesstoken: data.data.access_token,
+				                    username: $scope.user.username,
+				                    portalUser: $rootScope.loggedinportaluser,
+				          };
+		                $scope.userInfo = anuserInfo;
+		
+		        		$log.debug('========== > inside LoginCtrl controller $rootScope.portaluser ='+ $rootScope.loggedinportaluser);
+		        		$log.debug('========== > inside LoginCtrl controller $rootScope.portaluser ='+ $rootScope.loggedinportaluser.username);
+		                
+		                $location.path("/experiments_marketplace");
+		            },function(){
+		                console.log("error");
+		                window.location.href = "index.html#!/login";
+		            }
+		        );
+		}
     
     
     $scope.showOauth2FIWAREPopup = function showPopup(){
