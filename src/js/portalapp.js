@@ -243,7 +243,7 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
 		 var jsession = $cookieStore.get('JSESSIONID');
 		 $log.debug('========== > COOKIES jsession= '+  jsession);
 		 
-		 popup = $window.open( APIEndPointService.APIOAUTHURL + '/oauth/authorize?client_id=osapiWebClientId&response_type=code&redirect_uri=http://localhost:13000/osapi/testweb/oauthresp.html', '_blank' ,  "width=1024,height=500");
+		 popup = $window.open( APIEndPointService.APIOAUTHURL + '/oauth/authorize?client_id=osapiWebClientId&response_type=code&redirect_uri=' + APIEndPointService.WEBURL  ,  '_blank' ,  "width=1024,height=500");
 		 
 	    
 	  }
@@ -255,7 +255,7 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
         		//$log.debug('========== > inside LoginCtrl window.opener ='+ window.opener.location.href);
             	var url = new URL( url_string );
             	var c = url.searchParams.get( 'code' );
-            	var params = {grant_type:"authorization_code", redirect_uri: "http://localhost:13000/osapi/testweb/oauthresp.html",  code: c }
+            	var params = {grant_type:"authorization_code", redirect_uri: APIEndPointService.WEBURL,  code: c }
         		$log.debug('========== > inside LoginCtrl params ='+ params);
         		
             	var req = {
