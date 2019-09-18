@@ -9,7 +9,8 @@ appConfig.factory('APIEndPointService', function() {
 		  STATUS: "http://status.5ginfire.eu/",
 		  //APIURL: "/portal/"
 		  APIURL: "https://portal.5ginfire.eu/5ginfireportal/", //good to test CROSS ORIGIN scenarios. use with http://127.0.0.1/mp
-		  WEBURL: "https://portal.5ginfire.eu/"
+		  WEBURL: "https://portal.5ginfire.eu/",
+		  APIOAUTHURL: "http://localhost:13081/osapi-oauth-server"
 		  //APIURL: "http://localhost:13000/5ginfireportal/" //good to test CROSS ORIGIN scenarios. use with http://127.0.0.1/mp
 		  //APIURL: "http://83.212.106.218:8080/5ginfireportal/"
 	  };
