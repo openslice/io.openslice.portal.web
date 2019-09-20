@@ -934,8 +934,8 @@ appControllers.controller('ExperimentViewController', ['$scope', '$route', '$rou
 
 
 
-appControllers.controller('CategoriesListController', ['$scope','$window','$log', 'Category', 'popupService','ngDialog',
-                                             	function($scope, $window, $log, Category, popupService, ngDialog ) {
+appControllers.controller('CategoriesListController', ['$scope','$window','$log', 'Category', 'popupService','ngDialog', 'AdminCategory',
+                                             	function($scope, $window, $log, Category, popupService, ngDialog, AdminCategory ) {
                  	
                  	
 
@@ -950,7 +950,7 @@ appControllers.controller('CategoriesListController', ['$scope','$window','$log'
  		 	//console.log("Selected to DELETE Categorywith id = "+ useridx);
  		 	
 
- 		 	var cat=Category.get({id:useridx}, function() {
+ 		 	var cat=AdminCategory.get({id:useridx}, function() {
  			    $log.debug("WILL DELETE Category with ID "+ cat.id);
  			    
  		        if(popupService.showPopup('Really delete Category "'+cat.name+'" ?')){
