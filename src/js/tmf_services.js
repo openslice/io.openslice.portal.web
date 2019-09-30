@@ -1,5 +1,7 @@
 var tmfServices = angular.module('tmf.services',[]);
 
+// APITMFURL: "http://localhost:13082/tmf-api/serviceCatalogManagement/v4",
+
 //Service Catalog
 tmfServices.factory('ServiceCatalog', function($resource, APIEndPointService) {
 	return $resource(APIEndPointService.APITMFURL+"/serviceCatalog/:id", 
