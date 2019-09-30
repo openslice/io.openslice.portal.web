@@ -1,6 +1,10 @@
 var app = angular.module('portalapp', [   'ngCookies', 'ngResource', 'ngRoute', 
-                                         'trNgGrid', 'portalapp.controllers', 'portalwebapp.config', 
-                                         'portalapp.services', 'ngDialog',
+                                         'trNgGrid', 'portalapp.controllers', 
+                                         'tmf.controllers', 
+                                         'portalwebapp.config', 
+                                         'portalapp.services', 
+                                         'tmf.services', 
+                                         'ngDialog',
                                          'angular-loading-bar', 'ngAnimate' ]);
 
 
@@ -150,6 +154,9 @@ app.config(function($routeProvider, $locationProvider, $anchorScrollProvider, cf
 	}).when('/vfimage_view/:id', {
 		templateUrl : 'VFImageView.html',
 		controller : 'VFImageViewController'
+	}).when('/services_marketplace', {
+		templateUrl : 'ServicesMarketplace.html',
+		controller : 'ServicesMarketplaceController'
 	}).otherwise({
 		redirectTo : '/'
 	});
@@ -350,6 +357,7 @@ app.config(function($httpProvider) {
 						&& $location.path() != '/login' 
 							&& $location.path() != '/signup' 
 							&& $location.path() != '/experiments_marketplace'
+							&& $location.path() != '/services_marketplace'
 								&& $location.path() != '/vxf_marketplace'
 									&& ($location.path().indexOf("experiment_view") <=0) 
 									&& ($location.path().indexOf("registerconfirm") <=0) 							

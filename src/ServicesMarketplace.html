@@ -1,0 +1,70 @@
+<div class="page-header">
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 ">
+				
+				<select class="form-control" ng-options="c.name for c in catalogs" ng-model="selected_catalog" required></select>
+				
+				<ul class="nav nav-pills nav-stacked">
+					<li ng-class="{'active': isNoneSelected(), 'shadowed-dark': isNoneSelected(selected_category_ref) }">
+							<a ng-click="loadServiceCategory(-1)"> <span
+							class="badge pull-right shadowed">{{servicesTotalNumber}}</span> All
+					</a></li>
+					<li ng-class="{'active': isActive(categ), 'shadowed-dark': isActive(categ) }" 
+						ng-repeat="categ in selected_catalog.category "><a ng-click="loadServiceCategory(categ)"> 
+						<span class="badge pull-right shadowed">{{categ.servicescount}}</span>{{categ.name}}
+					</a></li>
+				</ul>	
+
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+				<div class="jumbotron shadowed">
+					<h2>Welcome to {{portalName}}!</h2>
+					<p>Browse available services and sign in to order!</p>
+				</div>
+				
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ></div>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" >
+					<input  type="text" class="form-control"  ng-model="search.name" placeholder="Filter services..." />
+					<h1></h1>
+				</div>
+				<p><b>{{selected_category.name}}</b> {{selected_category.description}}</p>
+					
+				<div class="row example-animate-container" >
+					
+					<div ng-repeat="s in services | filter:search" class="col-xs-12 col-sm-12 col-md-6 col-lg-4 appTile animate-repeat">
+					
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 appTitle">
+							{{s.name}}<p>
+							<small>by {{app.owner.username}}, {{app.owner.organization}}</small></p>
+						</div>
+						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 tileimg" style="background: url({{app.iconsrc}}) no-repeat center center;background-size: contain;">
+						<p ng-show="app.valid"><strong class="validtext_content" ></i>Valid</strong></p>
+						</div>
+						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+							<small>Version: {{s.version}}</small>
+							<br>
+							<small><span ng-repeat="appcat in app.categories">
+							<span class="label label-info">{{appcat.name}}</span>&nbsp;&nbsp;</span></small>
+							<br>
+							<br>
+							<p>{{s.description}}</p>
+							<p>
+								<a class="btn btn-default" href="#!/experiment_view/{{app.id}}" role="button">View details</a>
+							</p>
+						</div>
+						
+					</div>
+					
+				</div>	
+				
+				<div class="col-12 col-sm-12 col-lg-12">	
+					<li class="animate-repeat" ng-if="results.length == 0">
+					<strong>No results found...</strong></li>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
