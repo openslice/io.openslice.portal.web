@@ -8,7 +8,7 @@ var app = angular.module('portalapp', [   'ngCookies', 'ngResource', 'ngRoute',
                                          'angular-loading-bar', 'ngAnimate' ]);
 
 
-var portalversion = '20190606';
+var portalversion = '20191002';
 
 app.config(function($routeProvider, $locationProvider, $anchorScrollProvider, cfpLoadingBarProvider) {
 	
@@ -157,6 +157,18 @@ app.config(function($routeProvider, $locationProvider, $anchorScrollProvider, cf
 	}).when('/services_marketplace', {
 		templateUrl : 'ServicesMarketplace.html',
 		controller : 'ServicesMarketplaceController'
+	}).when('/service_catalogs', {
+		templateUrl : 'ServicesCatalog.html',
+		controller : 'ServicesCatalogController'
+	}).when('/service_categories', {
+		templateUrl : 'ServicesCategory.html',
+		controller : 'ServicesCategoryController'
+	}).when('/service_specs', {
+		templateUrl : 'ServicesSpecs.html',
+		controller : 'ServicesSpecsController'
+	}).when('/service_related_parties', {
+		templateUrl : 'ServicesRelatedParties.html',
+		controller : 'ServicesRelatedPartiesController'
 	}).otherwise({
 		redirectTo : '/'
 	});
@@ -358,9 +370,15 @@ app.config(function($httpProvider) {
 							&& $location.path() != '/signup' 
 							&& $location.path() != '/experiments_marketplace'
 							&& $location.path() != '/services_marketplace'
-								&& $location.path() != '/vxf_marketplace'
-									&& ($location.path().indexOf("experiment_view") <=0) 
-									&& ($location.path().indexOf("registerconfirm") <=0) 							
+							
+							&& $location.path() != '/service_catalogs'
+							&& $location.path() != '/service_categories'
+							&& $location.path() != '/service_specs'
+							&& $location.path() != '/service_related_parties'
+							
+							&& $location.path() != '/vxf_marketplace'
+							&& ($location.path().indexOf("experiment_view") <=0) 
+							&& ($location.path().indexOf("registerconfirm") <=0) 							
 							&& ($location.path().indexOf("fiwarepopup") <=0) 
 							&& ($location.path().indexOf("vxf_view") <=0) 
 							) {

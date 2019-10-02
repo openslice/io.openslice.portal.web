@@ -53,3 +53,19 @@ tmfControllers.controller('ServicesMarketplaceController', ['$scope','$window','
  };
 
 }]);
+
+
+tmfControllers.controller('ServicesCatalogController', ['$scope','$window','$log', 'ServiceCatalog', 'popupService', 'ngDialog',
+                            	function($scope, $window, $log, ServiceCatalog, popupService, ngDialog) {
+	
+	
+
+	$scope.catalogs = ServiceCatalog.query(function() {
+		    $scope.catalogs = orderBy($scope.catalogs, 'name', false);
+	});
+		 
+	
+	
+	
+	    
+}]);
