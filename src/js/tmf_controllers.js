@@ -58,14 +58,42 @@ tmfControllers.controller('ServicesMarketplaceController', ['$scope','$window','
 tmfControllers.controller('ServicesCatalogController', ['$scope','$window','$log', 'ServiceCatalog', 'popupService', 'ngDialog',
                             	function($scope, $window, $log, ServiceCatalog, popupService, ngDialog) {
 	
+
+	$scope.catalogs = ServiceCatalog.query(function() {
+		    $scope.catalogs = orderBy($scope.catalogs, 'name', false);
+		    $scope.selected_catalog = $scope.catalogs[0];
+	});
 	
+	    
+}]);
+
+tmfControllers.controller('ServicesCategoryController', ['$scope','$window','$log', 'ServiceCatalog', 'popupService', 'ngDialog',
+                            	function($scope, $window, $log, ServiceCatalog, popupService, ngDialog) {
 
 	$scope.catalogs = ServiceCatalog.query(function() {
 		    $scope.catalogs = orderBy($scope.catalogs, 'name', false);
 	});
-		 
 	
+	    
+}]);
+
+tmfControllers.controller('ServicesSpecsController', ['$scope','$window','$log', 'ServiceSpec', 'popupService', 'ngDialog',
+                            	function($scope, $window, $log, ServiceSpec, popupService, ngDialog) {
 	
+	$scope.specs = ServiceSpec.query(function() {
+		    $scope.specs= orderBy($scope.specs, 'name', false);
+	});
+	
+	    
+}]);
+
+
+tmfControllers.controller('ServiceSpecAddController', ['$scope','$window','$log', 'ServiceSpec', 'popupService', 'ngDialog',
+                            	function($scope, $window, $log, ServiceSpec, popupService, ngDialog) {
+	
+	$scope.specs = ServiceSpec.query(function() {
+		    $scope.specs= orderBy($scope.specs, 'name', false);
+	});
 	
 	    
 }]);

@@ -25,4 +25,14 @@ tmfServices.factory('ServiceCategory', function($resource, APIEndPointService) {
 	});
 });
 
+//Service Specification
+tmfServices.factory('ServiceSpec', function($resource, APIEndPointService) {
+	return $resource(APIEndPointService.APITMFURL+"/serviceSpecification/:id", 
+			{ id: '@id' }, {
+	    update: {
+	        method: 'PUT' // this method issues a PUT request
+      	
+	      }
+	});
+});
 

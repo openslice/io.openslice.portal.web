@@ -166,6 +166,9 @@ app.config(function($routeProvider, $locationProvider, $anchorScrollProvider, cf
 	}).when('/service_specs', {
 		templateUrl : 'ServicesSpecs.html',
 		controller : 'ServicesSpecsController'
+	}).when('/service_spec_add', {
+		templateUrl : 'ServiceSpecAdd.html',
+		controller : 'ServiceSpecAddController'
 	}).when('/service_related_parties', {
 		templateUrl : 'ServicesRelatedParties.html',
 		controller : 'ServicesRelatedPartiesController'
@@ -374,6 +377,8 @@ app.config(function($httpProvider) {
 							&& $location.path() != '/service_catalogs'
 							&& $location.path() != '/service_categories'
 							&& $location.path() != '/service_specs'
+							&& $location.path() != '/service_spec_add'
+							
 							&& $location.path() != '/service_related_parties'
 							
 							&& $location.path() != '/vxf_marketplace'
