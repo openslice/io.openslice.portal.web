@@ -6,12 +6,11 @@
 				<h1>Service Specifications</h1>
 				<h3>	
 					View and manage service specifications
-					<select class="form-control" ng-options="c.name for c in catalogs" ng-model="selected_catalog" required></select>
 				</h3>
 				<a class="btn btn-success btn-lg" data-toggle="modal" ng-href="#!/service_spec_add"> <i class="fa fa-user fa-2x pull-left"></i>&nbsp;&nbsp;Create New<br>service specifications</a>
 				<br>
 				<br>
-				<table id="grid1" tr-ng-grid="" class="usersGrid" items="selected_catalog.category"  page-items="50"
+				<table id="grid1" tr-ng-grid="" class="usersGrid" items="specs"  page-items="50"
 					fields="['id', 'name', 'description', 'lastUpdate', 'version',  'lifecycleStatus' ]">
 					<thead>
 						<tr>

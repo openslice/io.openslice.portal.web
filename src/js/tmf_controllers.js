@@ -55,10 +55,11 @@ tmfControllers.controller('ServicesMarketplaceController', ['$scope','$window','
 }]);
 
 
-tmfControllers.controller('ServicesCatalogController', ['$scope','$window','$log', 'ServiceCatalog', 'popupService', 'ngDialog',
-                            	function($scope, $window, $log, ServiceCatalog, popupService, ngDialog) {
+tmfControllers.controller('ServicesCatalogController', ['$scope','$window','$log', 'ServiceCatalog', 'popupService', 'ngDialog', '$filter',
+                            	function($scope, $window, $log, ServiceCatalog, popupService, ngDialog,  $filter) {
 	
 
+	var orderBy = $filter('orderBy');
 	$scope.catalogs = ServiceCatalog.query(function() {
 		    $scope.catalogs = orderBy($scope.catalogs, 'name', false);
 		    $scope.selected_catalog = $scope.catalogs[0];
@@ -67,9 +68,10 @@ tmfControllers.controller('ServicesCatalogController', ['$scope','$window','$log
 	    
 }]);
 
-tmfControllers.controller('ServicesCategoryController', ['$scope','$window','$log', 'ServiceCatalog', 'popupService', 'ngDialog',
-                            	function($scope, $window, $log, ServiceCatalog, popupService, ngDialog) {
+tmfControllers.controller('ServicesCategoryController', ['$scope','$window','$log', 'ServiceCatalog', 'popupService', 'ngDialog', '$filter',
+                            	function($scope, $window, $log, ServiceCatalog, popupService, ngDialog,  $filter) {
 
+	var orderBy = $filter('orderBy');
 	$scope.catalogs = ServiceCatalog.query(function() {
 		    $scope.catalogs = orderBy($scope.catalogs, 'name', false);
 	});
@@ -77,9 +79,10 @@ tmfControllers.controller('ServicesCategoryController', ['$scope','$window','$lo
 	    
 }]);
 
-tmfControllers.controller('ServicesSpecsController', ['$scope','$window','$log', 'ServiceSpec', 'popupService', 'ngDialog',
-                            	function($scope, $window, $log, ServiceSpec, popupService, ngDialog) {
-	
+tmfControllers.controller('ServicesSpecsController', ['$scope','$window','$log', 'ServiceSpec', 'popupService', 'ngDialog', '$filter',
+                            	function($scope, $window, $log, ServiceSpec, popupService, ngDialog,  $filter) {
+
+	var orderBy = $filter('orderBy');
 	$scope.specs = ServiceSpec.query(function() {
 		    $scope.specs= orderBy($scope.specs, 'name', false);
 	});
@@ -88,12 +91,66 @@ tmfControllers.controller('ServicesSpecsController', ['$scope','$window','$log',
 }]);
 
 
-tmfControllers.controller('ServiceSpecAddController', ['$scope','$window','$log', 'ServiceSpec', 'popupService', 'ngDialog',
-                            	function($scope, $window, $log, ServiceSpec, popupService, ngDialog) {
+tmfControllers.controller('ServiceSpecAddController', ['$scope','$window','$log', 'ServiceSpec', 'popupService', 'ngDialog', '$location',
+                            	function($scope, $window, $log, ServiceSpec, popupService, ngDialog, $location) {
 	
-	$scope.specs = ServiceSpec.query(function() {
-		    $scope.specs= orderBy($scope.specs, 'name', false);
-	});
+	 $scope.spec=new ServiceSpec();
+
+	    $scope.addSpec=function(){
+	        $scope.spec.$save(function(){
+	        	console.log("Service Spec added. ID = " + $scope.spec.id);
+				$location.path("/service_spec_edit/" + $scope.spec.id);
+	        });
+	    }
+	
+	    
+}]);
+
+
+tmfControllers.controller('ServiceSpecEditController', ['$scope','$window','$log', 'ServiceSpec', 'popupService', 'ngDialog', '$location', '$routeParams',
+                            	function($scope, $window, $log, ServiceSpec, popupService, ngDialog, $location, $routeParams) {
+	
+	 $scope.updateSpec=function(){
+	        $scope.spec.$update(function(){
+				$location.path("/service_specs");
+	        });
+	    };
+
+	    function addZero(i) {
+		  if (i < 10) {
+		    i = "0" + i;
+		  }
+		  return "" + i;
+		}	
+            
+		$scope.minutes=[];
+		for (var i=0;i<60;i++) $scope.minutes.push(addZero(i));
+		
+		var toUTCDate = function(date){
+		    var _utc = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),  date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+		    return _utc;
+		  };
+			
+	    $scope.loadSpec=function(){
+	        $scope.spec=ServiceSpec.get({id:$routeParams.id},
+	        	function() {
+	        		console.log("$scope.spec.validFor.startDateTime  = " + $scope.spec.validFor.startDateTime );
+        			//$scope.spec.validFor.startDateTime = toUTCDate( new Date( $scope.spec.validFor.startDateTime ) );
+        			$scope.spec.validFor.startDateTime =  new Date( $scope.spec.validFor.startDateTime ) ;
+		        	console.log("$scope.spec.validFor.startDateTime  = " + $scope.spec.validFor.startDateTime );		        	
+		        	console.log("$scope.spec.validFor.startDateTime  = " + toUTCDate ( $scope.spec.validFor.startDateTime ) );
+		        	
+	        		$scope.spec.validFor.startDateTime.startReqHour = addZero($scope.spec.validFor.startDateTime.getHours());
+	        		$scope.spec.validFor.startDateTime.startReqMinute = addZero($scope.spec.validFor.startDateTime.getMinutes());
+
+        			$scope.spec.validFor.endDateTime =  new Date( $scope.spec.validFor.endDateTime ) ;
+	        		$scope.spec.validFor.endDateTime.startReqHour = addZero($scope.spec.validFor.endDateTime.getHours());
+	        		$scope.spec.validFor.endDateTime.startReqMinute = addZero($scope.spec.validFor.endDateTime.getMinutes());
+	        		
+	        	});
+	    };
+
+	    $scope.loadSpec();
 	
 	    
 }]);

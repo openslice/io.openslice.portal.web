@@ -169,6 +169,9 @@ app.config(function($routeProvider, $locationProvider, $anchorScrollProvider, cf
 	}).when('/service_spec_add', {
 		templateUrl : 'ServiceSpecAdd.html',
 		controller : 'ServiceSpecAddController'
+	}).when('/service_spec_edit/:id', {
+		templateUrl : 'ServiceSpecEdit.html',
+		controller : 'ServiceSpecEditController'
 	}).when('/service_related_parties', {
 		templateUrl : 'ServicesRelatedParties.html',
 		controller : 'ServicesRelatedPartiesController'
@@ -377,7 +380,7 @@ app.config(function($httpProvider) {
 							&& $location.path() != '/service_catalogs'
 							&& $location.path() != '/service_categories'
 							&& $location.path() != '/service_specs'
-							&& $location.path() != '/service_spec_add'
+							&& $location.path() != '/service_spec_add' 
 							
 							&& $location.path() != '/service_related_parties'
 							
@@ -386,6 +389,7 @@ app.config(function($httpProvider) {
 							&& ($location.path().indexOf("registerconfirm") <=0) 							
 							&& ($location.path().indexOf("fiwarepopup") <=0) 
 							&& ($location.path().indexOf("vxf_view") <=0) 
+							&& ($location.path().indexOf("service_spec_edit") <=0)
 							) {
 					$log.debug('========== > $rootScope.loggedIn IS FALSE = ' + $rootScope.loggedIn );
 					$location.path('/login');
@@ -418,6 +422,7 @@ app.config(function($httpProvider) {
 				$log.debug('========== > response  response.status = ' + response.status  );
 				//$log.debug('========== > response  response.data = ' + response.data );
 				if (response.status === 401 && $location.path() != '/login') {
+					$log.debug('========== > response  will force to LOGIN page'  );
 					$rootScope.loggedIn = false;
 		            $window.localStorage.removeItem("userInfo");
 					$location.path('/login');
