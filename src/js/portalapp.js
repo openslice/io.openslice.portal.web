@@ -160,9 +160,21 @@ app.config(function($routeProvider, $locationProvider, $anchorScrollProvider, cf
 	}).when('/service_catalogs', {
 		templateUrl : 'ServicesCatalog.html',
 		controller : 'ServicesCatalogController'
+	}).when('/service_catalog_add', {
+		templateUrl : 'ServicesCatalogAdd.html',
+		controller : 'ServicesCatalogAddController'
+	}).when('/service_catalog_edit/:id', {
+		templateUrl : 'ServicesCatalogEdit.html',
+		controller : 'ServicesCatalogEditController'
 	}).when('/service_categories', {
 		templateUrl : 'ServicesCategory.html',
 		controller : 'ServicesCategoryController'
+	}).when('/service_category_add', {
+		templateUrl : 'ServicesCategoryAdd.html',
+		controller : 'ServicesCategoryAddController'
+	}).when('/service_category_edit/:id', {
+		templateUrl : 'ServicesCategoryEdit.html',
+		controller : 'ServicesCategoryEditController'
 	}).when('/service_specs', {
 		templateUrl : 'ServicesSpecs.html',
 		controller : 'ServicesSpecsController'
@@ -378,18 +390,23 @@ app.config(function($httpProvider) {
 							&& $location.path() != '/services_marketplace'
 							
 							&& $location.path() != '/service_catalogs'
+							&& $location.path() != '/service_catalog_add'
 							&& $location.path() != '/service_categories'
+							&& $location.path() != '/service_category_add'
 							&& $location.path() != '/service_specs'
 							&& $location.path() != '/service_spec_add' 
 							
 							&& $location.path() != '/service_related_parties'
+							
+							&& ($location.path().indexOf("service_spec_edit") <=0)
+							&& ($location.path().indexOf("service_catalog_edit") <=0)
+							&& ($location.path().indexOf("service_category_edit") <=0)
 							
 							&& $location.path() != '/vxf_marketplace'
 							&& ($location.path().indexOf("experiment_view") <=0) 
 							&& ($location.path().indexOf("registerconfirm") <=0) 							
 							&& ($location.path().indexOf("fiwarepopup") <=0) 
 							&& ($location.path().indexOf("vxf_view") <=0) 
-							&& ($location.path().indexOf("service_spec_edit") <=0)
 							) {
 					$log.debug('========== > $rootScope.loggedIn IS FALSE = ' + $rootScope.loggedIn );
 					$location.path('/login');

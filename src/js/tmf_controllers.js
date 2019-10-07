@@ -68,16 +68,107 @@ tmfControllers.controller('ServicesCatalogController', ['$scope','$window','$log
 	    
 }]);
 
-tmfControllers.controller('ServicesCategoryController', ['$scope','$window','$log', 'ServiceCatalog', 'popupService', 'ngDialog', '$filter',
-                            	function($scope, $window, $log, ServiceCatalog, popupService, ngDialog,  $filter) {
+
+tmfControllers.controller('ServicesCatalogAddController', ['$scope','$window','$log', 'ServiceCatalog', 'popupService', 'ngDialog', '$filter', '$location',
+                            	function($scope, $window, $log, ServiceCatalog, popupService, ngDialog,  $filter, $location) {
+	
+
+
+	
+	$scope.catalog=new ServiceCatalog();
+
+	    $scope.addCatalog=function(){
+	        $scope.catalog.$save(function(){
+	        	console.log("catalog added. ID = " + $scope.catalog.id);
+				$location.path("/service_catalogs");
+	        });
+	    }
+	
+	    
+}]);
+
+tmfControllers.controller('ServicesCatalogEditController', ['$scope', '$route', '$routeParams', '$location', 'ServiceCatalog', '$anchorScroll',
+        function( $scope, $route, $routeParams, $location, ServiceCatalog, $anchorScroll){
+
+
+	
+    $scope.updateCatalog=function(){
+		delete $scope.catalog.id;
+		delete $scope.catalog.href;
+		delete $scope.catalog.lastUpdate;
+		
+        $scope.catalog.$update({id:$routeParams.id}, function(){
+			$location.path("/service_catalogs");
+        });
+    };
+
+    $scope.loadCatalog=function(){
+        $scope.catalog=ServiceCatalog.get({id:$routeParams.id});
+	    console.log("catalog loaded. ID = " + $scope.catalog.id);
+    };
+
+	    console.log("catalog load");
+    $scope.loadCatalog();
+}]);
+
+
+
+tmfControllers.controller('ServicesCategoryController', ['$scope','$window','$log', 'ServiceCategory', 'popupService', 'ngDialog', '$filter',
+                            	function($scope, $window, $log, ServiceCategory, popupService, ngDialog,  $filter) {
 
 	var orderBy = $filter('orderBy');
-	$scope.catalogs = ServiceCatalog.query(function() {
-		    $scope.catalogs = orderBy($scope.catalogs, 'name', false);
+	$scope.categories = ServiceCategory.query(function() {
+		    $scope.categories = orderBy($scope.categories, 'name', false);
 	});
 	
 	    
 }]);
+
+
+tmfControllers.controller('ServicesCategoryAddController', ['$scope','$window','$log', 'ServiceCategory', 'popupService', 'ngDialog', '$filter', '$location',
+                            	function($scope, $window, $log, ServiceCategory, popupService, ngDialog,  $filter, $location) {
+	
+
+
+	
+	$scope.category=new ServiceCategory();
+
+	    $scope.addCategory=function(){
+	        $scope.category.$save(function(){
+	        	console.log("category added. ID = " + $scope.category.id);
+				$location.path("/service_categories");
+	        });
+	    }
+	
+	    
+}]);
+
+
+tmfControllers.controller('ServicesCategoryEditController', ['$scope', '$route', '$routeParams', '$location', 'ServiceCategory', '$anchorScroll',
+        function( $scope, $route, $routeParams, $location, ServiceCategory, $anchorScroll){
+
+
+	
+    $scope.updateCategory=function(){
+		delete $scope.category.id;
+		delete $scope.category.href;
+		delete $scope.category.lastUpdate;
+		
+        $scope.category.$update({id:$routeParams.id}, function(){
+			$location.path("/service_categories");
+        });
+    };
+
+    $scope.loadCategory=function(){
+        $scope.category=ServiceCategory.get({id:$routeParams.id});
+	    console.log("category loaded. ID = " + $scope.category.id);
+    };
+
+	    console.log("category load");
+    $scope.loadCategory();
+}]);
+
+
 
 tmfControllers.controller('ServicesSpecsController', ['$scope','$window','$log', 'ServiceSpec', 'popupService', 'ngDialog', '$filter',
                             	function($scope, $window, $log, ServiceSpec, popupService, ngDialog,  $filter) {

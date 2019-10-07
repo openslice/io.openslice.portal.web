@@ -7,7 +7,8 @@ tmfServices.factory('ServiceCatalog', function($resource, APIEndPointService) {
 	return $resource(APIEndPointService.APITMFURL+"/serviceCatalog/:id", 
 			{ id: '@id' }, {
 	    update: {
-	        method: 'PUT' // this method issues a PUT request
+	        method: 'PATCH', // this method issues a PUT request
+			url: APIEndPointService.APITMFURL+"/serviceCatalog/:id"
       	
 	      }
 	});
@@ -19,7 +20,8 @@ tmfServices.factory('ServiceCategory', function($resource, APIEndPointService) {
 	return $resource(APIEndPointService.APITMFURL+"/serviceCategory/:id", 
 			{ id: '@id' }, {
 	    update: {
-	        method: 'PUT' // this method issues a PUT request
+	        method: 'PATCH', // this method issues a PUT request
+			url: APIEndPointService.APITMFURL+"/serviceCategory/:id"
       	
 	      }
 	});
@@ -30,7 +32,8 @@ tmfServices.factory('ServiceSpec', function($resource, APIEndPointService) {
 	return $resource(APIEndPointService.APITMFURL+"/serviceSpecification/:id", 
 			{ id: '@id' }, {
 	    update: {
-	        method: 'PUT' // this method issues a PUT request
+	        method: 'PATCH', // this method issues a PUT request
+			url: APIEndPointService.APITMFURL+"/serviceSpecification/:id"
       	
 	      }
 	});
