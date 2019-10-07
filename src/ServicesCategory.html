@@ -11,13 +11,15 @@
 				<br>
 				<br>
 				<table id="grid1" tr-ng-grid="" class="usersGrid" items="categories"  page-items="50"
-					fields="['id', 'name' ]">
+					fields="['id', 'name', 'description', 'lastUpdate', 'version',  'lifecycleStatus' ]">
 					<thead>
 						<tr>
 							<th field-name="id" display-name="Id" cell-width="5em"
 								display-align="right"></th>
 
+							<th field-name="lastUpdate" display-name="Last Update"></th>
 							<th field-name="name" display-name="Name"></th>
+							<th field-name="description" display-name="Description"></th>
 							</th>
 						</tr>
 					</thead>
