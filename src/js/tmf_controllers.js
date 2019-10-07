@@ -87,8 +87,8 @@ tmfControllers.controller('ServicesCatalogAddController', ['$scope','$window','$
 	    
 }]);
 
-tmfControllers.controller('ServicesCatalogEditController', ['$scope', '$route', '$routeParams', '$location', 'ServiceCatalog', '$anchorScroll',
-        function( $scope, $route, $routeParams, $location, ServiceCatalog, $anchorScroll){
+tmfControllers.controller('ServicesCatalogEditController', ['$scope', '$route', '$routeParams', '$location', 'ServiceCatalog', 'ServiceCategory', '$anchorScroll',
+        function( $scope, $route, $routeParams, $location, ServiceCatalog, ServiceCategory, $anchorScroll){
 
 
 	
@@ -103,11 +103,28 @@ tmfControllers.controller('ServicesCatalogEditController', ['$scope', '$route', 
     };
 
     $scope.loadCatalog=function(){
-        $scope.catalog=ServiceCatalog.get({id:$routeParams.id});
+    	 $scope.categories = ServiceCategory.query(function() {
+    		    $scope.categories = orderBy($scope.categories, 'name', false);
+    	    });
+    	     	
+        $scope.catalog=ServiceCatalog.get({id:$routeParams.id}, function() {
+        	
+        });
+        
 	    console.log("catalog loaded. ID = " + $scope.catalog.id);
     };
-
-	    console.log("catalog load");
+    
+    $scope.addCategory=function(){
+    		$scope.catalog.category.push({'name': $scope.selectedCategoryToAdd.name, 'id':$scope.selectedCategoryToAdd.id})
+			
+	};
+		
+	$scope.deleteCategory = function(index) {	
+			$scope.catalog.category.splice(index, 1);
+	}
+   
+    
+	console.log("catalog load");
     $scope.loadCatalog();
 }]);
 

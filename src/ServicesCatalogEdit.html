@@ -1,85 +1,126 @@
-<div class="page-header" >
+<div class="page-header">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<h1 id="headerTitle">Edit Catalog</h1>
 
-				<form class="form-horizontal" role="form" ng-submit="updateCatalog()" id="editCategoryForm">
-					
+				<form class="form-horizontal" role="form"
+					ng-submit="updateCatalog()" id="editCategoryForm">
+
 					<div class="form-group">
-						<label for="spec.id" class="col-sm-2 control-label"  >Id</label>
+						<label for="spec.id" class="col-sm-2 control-label">Id</label>
 						<div class="col-sm-10">
 							<b>{{catalog.id}}</b>* not editable
 						</div>
 					</div>
-					
+
 					<div class="form-group">
-						<label for="spec.id" class="col-sm-2 control-label"  >Last update</label>
+						<label for="spec.id" class="col-sm-2 control-label">Last
+							update</label>
 						<div class="col-sm-10">
 							<b>{{catalog.lastUpdate}}</b>* not editable
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="catalog.name" class="col-sm-2 control-label">Name</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control"  ng-model="catalog.name" value="" placeholder="name" />
+							<input type="text" class="form-control" ng-model="catalog.name"
+								value="" placeholder="name" />
 						</div>
 					</div>
-					
-					
+
+
 					<div class="form-group">
 						<label for="spec.description" class="col-sm-2 control-label">Description</label>
 						<div class="col-sm-10">
-							<textarea class="form-control"   rows="5"  ng-model="catalog.description" value="" placeholder="" "  /></textarea>
+							<textarea class="form-control" rows="5"
+								ng-model="catalog.description" value="" placeholder="" "  /></textarea>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="spec.version" class="col-sm-2 control-label">Version</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control"  ng-model="catalog.version" value="" placeholder="enter a version for your Catalog" required/>
+							<input type="text" class="form-control"
+								ng-model="catalog.version" value=""
+								placeholder="enter a version for your Catalog" required />
 						</div>
 					</div>
-					
-					
+
+
 					<div class="form-group">
-						<label for="spec.validFor" class="col-sm-2 control-label">Valid from Start Date</label>
+						<label for="spec.validFor" class="col-sm-2 control-label">Valid
+							from Start Date</label>
 						<div class="col-sm-10">
-							 <md-datepicker ng-model="catalog.validFor.startDateTime" md-placeholder="Enter date" md-date-locale ="{ msgOpenCalendar: 'Open a special calendar' }" ></md-datepicker>
-						
-							<select style='width:100px;float:left;' class="form-control" ng-model="catalog.validFor.startDateTime.startReqHour" ng-options="option as option for option in ['00', '01', '02', '03','04', '05','06', '07','08', '09','10', '11','12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']" required  ></select>
-							<select style='width:100px;float:left;' class="form-control" ng-model="catalog.validFor.startDateTime.startReqMinute" ng-options="option as option for option in minutes"  required ></select>
+							<md-datepicker ng-model="catalog.validFor.startDateTime"
+								md-placeholder="Enter date"
+								md-date-locale="{ msgOpenCalendar: 'Open a special calendar' }"></md-datepicker>
+
+							<select style='width: 100px; float: left;' class="form-control"
+								ng-model="catalog.validFor.startDateTime.startReqHour"
+								ng-options="option as option for option in ['00', '01', '02', '03','04', '05','06', '07','08', '09','10', '11','12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']"
+								required></select> <select style='width: 100px; float: left;'
+								class="form-control"
+								ng-model="catalog.validFor.startDateTime.startReqMinute"
+								ng-options="option as option for option in minutes" required></select>
 							<!-- ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55'] -->
-						</div>						
+						</div>
 					</div>
 					<div class="form-group">
-						<label for="app.name" class="col-sm-2 control-label">Valid until End Date</label>
+						<label for="app.name" class="col-sm-2 control-label">Valid
+							until End Date</label>
 						<div class="col-sm-10">
-							 <md-datepicker ng-model="catalog.validFor.endDateTime" md-placeholder="Enter date" ></md-datepicker>
-						
-							<select style='width:100px;float:left;' class="form-control" ng-model="catalog.validFor.endDateTime.startReqHour" ng-options="option as option for option in ['00', '01', '02', '03','04', '05','06', '07','08', '09','10', '11','12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']" required ></select>
-							<select style='width:100px;float:left;' class="form-control" ng-model="catalog.validFor.endDateTime.startReqMinute" ng-options="option as option for option in minutes"  required ></select>
+							<md-datepicker ng-model="catalog.validFor.endDateTime"
+								md-placeholder="Enter date"></md-datepicker>
+
+							<select style='width: 100px; float: left;' class="form-control"
+								ng-model="catalog.validFor.endDateTime.startReqHour"
+								ng-options="option as option for option in ['00', '01', '02', '03','04', '05','06', '07','08', '09','10', '11','12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']"
+								required></select> <select style='width: 100px; float: left;'
+								class="form-control"
+								ng-model="catalog.validFor.endDateTime.startReqMinute"
+								ng-options="option as option for option in minutes" required></select>
 							<!-- ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55'] -->
-						</div>						
+						</div>
 					</div>
-					
-						
-				<div class="form-group">
-						<label for="role" class="col-sm-2 control-label">Lifecycle Status</label>
+
+
+					<div class="form-group">
+						<label for="catalog.lifecycleStatus"
+							class="col-sm-2 control-label">Lifecycle Status</label>
 						<div class="col-sm-10">
-							<select class="form-control" ng-model="catalog.lifecycleStatus" >
-							  <option>In study</option>
-							  <option>In design</option>
-							  <option>In test</option>
-							  <option>Active</option>
-							  <option>Launched</option>
-							  <option>Retired</option>
-							  <option>Obsolete</option>
-							  <option>Rejected</option>
+							<select class="form-control" ng-model="catalog.lifecycleStatus">
+								<option>In study</option>
+								<option>In design</option>
+								<option>In test</option>
+								<option>Active</option>
+								<option>Launched</option>
+								<option>Retired</option>
+								<option>Obsolete</option>
+								<option>Rejected</option>
 							</select>
 						</div>
 					</div>
+
+
+
+					<div class="form-group">
+
+						<label for="catalog.category" class="col-sm-2 control-label">Categories</label>
+						<div class="col-sm-10">
+							<select class="form-control" ng-model="selectedCategoryToAdd" ng-options="e.name for e in categories"><option></option></select>
+
+							<button ng-click="addCategory()">Add</button>
+							<ul>
+								<li ng-repeat="c in catalog.category" class="{'fadeOut' : skill.done}">
+								<span class="fa fa-close" ng-click="deleteCategory($index)"></span> <span>{{c.name}}</span>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
