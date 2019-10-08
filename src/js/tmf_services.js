@@ -39,3 +39,14 @@ tmfServices.factory('ServiceSpec', function($resource, APIEndPointService) {
 	});
 });
 
+//Service Candidate
+tmfServices.factory('ServiceCandidate', function($resource, APIEndPointService) {
+	return $resource(APIEndPointService.APITMFURL+"/serviceCandidate/:id", 
+			{ id: '@id' }, {
+	    update: {
+	        method: 'PATCH', // this method issues a PUT request
+			url: APIEndPointService.APITMFURL+"/serviceCandidate/:id"
+      	
+	      }
+	});
+});

@@ -175,6 +175,9 @@ app.config(function($routeProvider, $locationProvider, $anchorScrollProvider, cf
 	}).when('/service_category_edit/:id', {
 		templateUrl : 'ServicesCategoryEdit.html',
 		controller : 'ServicesCategoryEditController'
+	}).when('/service_category_candidate_edit/:id', {
+		templateUrl : 'ServicesCategoryServiceCandidatesEdit.html',
+		controller : 'ServicesCategoryServiceCandidatesEditController'
 	}).when('/service_specs', {
 		templateUrl : 'ServicesSpecs.html',
 		controller : 'ServicesSpecsController'
@@ -401,6 +404,7 @@ app.config(function($httpProvider) {
 							&& ($location.path().indexOf("service_spec_edit") <=0)
 							&& ($location.path().indexOf("service_catalog_edit") <=0)
 							&& ($location.path().indexOf("service_category_edit") <=0)
+							&& ($location.path().indexOf("service_category_candidate_edit") <=0)
 							
 							&& $location.path() != '/vxf_marketplace'
 							&& ($location.path().indexOf("experiment_view") <=0) 

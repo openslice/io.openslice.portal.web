@@ -1,0 +1,34 @@
+<div class="page-header" >
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h1 id="headerTitle">Edit Category Services</h1>
+				<h3 >View and manage service specifications of category: {{category.name}}</h3>
+				
+				<br>
+				<br>
+				<table id="grid1" tr-ng-grid="" class="usersGrid" items="specs"  page-items="50"
+					fields="['id', 'name', 'version' ]">
+					<thead>
+						<tr>
+							<th field-name="id" display-name="Id" cell-width="5em"
+								display-align="right"></th>
+
+							<th field-name="name" display-name="Name"></th>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td nowrap="nowrap">
+								<a class="btn btn-info" ng-click="service_candidate_add(gridItem, gridItem.id)"><i class="fa fa-check-o "></i>Add</a>
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+	</div>
+</div>

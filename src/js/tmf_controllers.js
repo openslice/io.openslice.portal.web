@@ -219,7 +219,10 @@ tmfControllers.controller('ServiceSpecEditController', ['$scope','$window','$log
                             	function($scope, $window, $log, ServiceSpec, popupService, ngDialog, $location, $routeParams) {
 	
 	 $scope.updateSpec=function(){
-	        $scope.spec.$update(function(){
+			delete $scope.spec.id;
+			delete $scope.spec.href;
+			delete $scope.spec.lastUpdate;
+	        $scope.spec.$update({id:$routeParams.id}, function(){
 				$location.path("/service_specs");
 	        });
 	    };
@@ -262,3 +265,44 @@ tmfControllers.controller('ServiceSpecEditController', ['$scope','$window','$log
 	
 	    
 }]);
+
+
+tmfControllers.controller('ServicesCategoryServiceCandidatesEditController', ['$scope','$window','$log', 'ServiceSpec', 'ServiceCategory', 'ServiceCandidate', 'popupService', 'ngDialog', '$location', '$routeParams', '$filter',
+                            	function($scope, $window, $log, ServiceSpec, ServiceCategory, ServiceCandidate, popupService, ngDialog, $location, $routeParams, $filter) {
+
+	var orderBy = $filter('orderBy');
+	
+	$scope.specs = ServiceSpec.query(function() {
+		    $scope.specs= orderBy($scope.specs, 'name', false);
+	});
+	
+	$scope.loadCategory=function(){
+        $scope.category=ServiceCategory.get({id:$routeParams.id});
+	    console.log("category loaded. ID = " + $scope.category.id);
+    };
+
+	    
+    $scope.service_candidate_add=function(gridItem, gridItemid){
+	
+	    console.log("spec ID = " + gridItem.id );
+
+		$scope.candidateToAdd=new ServiceCandidate();
+		
+		$scope.candidateToAdd.name = gridItem.name; 
+		$scope.candidateToAdd.serviceSpecification = "{ 'id': '"+ gridItem.id + "' }"; 
+		
+		$scope.candidateToAdd.category = "{ 'id': '"+ $scope.category.id + "' }"; 
+		
+	    $scope.candidateToAdd.$save(function(){
+				//$location.path("/service_category_edit/" +  $scope.category.id );
+	    });
+    };
+	
+    $scope.loadCategory();
+
+}]);
+
+
+
+
+
