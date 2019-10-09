@@ -33,11 +33,11 @@
 					
 				<div class="row example-animate-container" >
 					
-					<div ng-repeat="s in services | filter:search" class="col-xs-12 col-sm-12 col-md-6 col-lg-4 appTile animate-repeat">
+					<div ng-repeat="s in selected_category.serviceCandidate | filter:search" class="col-xs-12 col-sm-12 col-md-6 col-lg-4 appTile animate-repeat">
 					
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 appTitle">
 							{{s.name}}<p>
-							<small>by {{app.owner.username}}, {{app.owner.organization}}</small></p>
+							<small>version: {{s.version}}</small></p>
 						</div>
 						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 tileimg" style="background: url({{app.iconsrc}}) no-repeat center center;background-size: contain;">
 						<p ng-show="app.valid"><strong class="validtext_content" ></i>Valid</strong></p>
@@ -46,12 +46,12 @@
 							<small>Version: {{s.version}}</small>
 							<br>
 							<small><span ng-repeat="appcat in app.categories">
-							<span class="label label-info">{{appcat.name}}</span>&nbsp;&nbsp;</span></small>
+							<span class="label label-info">{{s.name}}</span>&nbsp;&nbsp;</span></small>
 							<br>
 							<br>
 							<p>{{s.description}}</p>
 							<p>
-								<a class="btn btn-default" href="#!/experiment_view/{{app.id}}" role="button">View details</a>
+								<a class="btn btn-default" href="#!/service_spec_view/{{app.id}}" role="button">View details</a>
 							</p>
 						</div>
 						

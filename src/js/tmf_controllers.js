@@ -289,12 +289,12 @@ tmfControllers.controller('ServicesCategoryServiceCandidatesEditController', ['$
 		$scope.candidateToAdd=new ServiceCandidate();
 		
 		$scope.candidateToAdd.name = gridItem.name; 
-		$scope.candidateToAdd.serviceSpecification = "{ 'id': '"+ gridItem.id + "' }"; 
+		$scope.candidateToAdd.serviceSpecification = { 'id': gridItem.id,  'name' : gridItem.name  }; 
 		
-		$scope.candidateToAdd.category = "{ 'id': '"+ $scope.category.id + "' }"; 
+		$scope.candidateToAdd.category = [{ 'id' : $scope.category.id  }]; 
 		
 	    $scope.candidateToAdd.$save(function(){
-				//$location.path("/service_category_edit/" +  $scope.category.id );
+				$location.path("/service_category_edit/" +  $scope.category.id );
 	    });
     };
 	
