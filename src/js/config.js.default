@@ -14,5 +14,10 @@ appConfig.factory('APIEndPointService', function() {
 		  APITMFURL: "http://localhost:13082/tmf-api/serviceCatalogManagement/v4",
 		  //APIURL: "http://localhost:13000/5ginfireportal/" //good to test CROSS ORIGIN scenarios. use with http://127.0.0.1/mp
 		  //APIURL: "http://83.212.106.218:8080/5ginfireportal/"
+		  //FOR DEVELOPMENT: 
+		  //APIURL: "http://localhost:13000", //good to test CROSS ORIGIN scenarios. use with http://127.0.0.1/mp
+		  //APIOAUTHURL: "http://localhost:13081/osapi-oauth-server", //good to test CROSS ORIGIN scenarios. use with http://127.0.0.1/mp
+		  //APITMFURL: "http://localhost:13082/tmf-api/serviceCatalogManagement/v4",
+		  //WEBURL: "http://localhost:13000/osapi/testweb"
 	  };
 });
