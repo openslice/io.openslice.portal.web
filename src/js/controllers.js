@@ -640,7 +640,7 @@ appControllers.controller('ExperimentEditController', ['$scope', '$route', '$rou
 
 	        return $http({
 				method : 'PUT',
-				url : APIEndPointService.APIURL+'aosapi/dmin/experimentobds/'+ eOnBoardedDescriptor.id +'/onboard',
+				url : APIEndPointService.APIURL+'osapi/admin/experimentobds/'+ eOnBoardedDescriptor.id +'/onboard',
 				headers : {
 					'Content-Type' : 'application/json'
 				},
