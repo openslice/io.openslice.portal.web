@@ -1,0 +1,236 @@
+<!doctype html>
+<html ng-app='portalapp'>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- THIS IS FOR Proper scaling on iPad :-) -->
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+
+
+
+<script src="js/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+<script src="js/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+ 
+<link rel="stylesheet" href="css/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="js/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-resource.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-route.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-cookies.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-animate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-touch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-sanitize.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-aria.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-messages.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+<script src="js/libs/angularjs/angular-material.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js"></script>
+
+<link rel="stylesheet" href="css/libs/font-awesome.min.css" >
+
+
+
+<link rel="stylesheet" href="css/style.css">
+
+<title>Openslice</title>
+
+</head>
+<body >
+	<div class="slide-animate">
+	
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavCtrl">
+				
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+					<a class="navbar-brand" href="">
+			<img src="logo_clear.png" height="25px"></a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav" >
+				
+					 
+						<li><a href="services/">Services Portal</a></li>
+						
+						<li><a href="nfvportal/">NFV Portal</a></li>
+						
+			
+							
+			
+				</ul>
+		
+
+			</div>
+
+		</div>
+	</nav>
+	
+	
+	</div>
+
+	<div id="main-content" class="content" ng-view autoscroll="true">
+	</div>
+	
+
+<div>
+<div class="section" style="color: #FFFFFF;	 background: url('background.png') no-repeat center center #aeaeae;	margin-top:10px;min-height: 380px;">
+	<div  class="container">
+		<div class="row shadowed-dark" >
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-12 ">
+				<h1>&nbsp;</h1>
+				<h2>
+					Welcome to Openslice!
+				</h2>
+				<h4>Openslice is a prototype open source, operations support system. It supports VNF/NSD onboarding to OpenSourceMANO (OSM) and NSD deployment management. It also supports TMFORUM OpenAPIs regarding Service Catalog Management, Ordering, Resource, etc.</h4>
+				
+				<h4>Check <strong><a style="color:#FFFFFF;" href="http://openslice.io">http://openslice.io</a></strong> for further documentation</h4>
+				
+			</div>
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+				<h1></h1>
+							
+					
+				<h4></h4>
+				
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="section" >
+	<div  class="container">
+			<div class="row">
+				<!--  ------------------------  START CONTENT      ------------------------      -->
+			
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<a href="services/"><img src="services.png"></a>
+				</div>
+				
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<h1>&nbsp;</h1>
+					<h2 class="shadowed">Deploy Services by using Standard Open APIs!</h2>
+					<p>Design Catalogs and Services specifications and manage Service orders!</p>
+					<a href="services/" ><button type="button" class="btn btn-info">Services portal</button></a>
+					<h1>&nbsp;</h1>
+					 
+				</div>
+			
+			</div>
+			<!--  ------------------------  END CONTENT      ------------------------      -->
+	</div>
+</div>
+
+<div class="section" >
+	<div  class="container">
+			<div class="row">
+				<!--  ------------------------  START CONTENT      ------------------------      -->
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<h1>&nbsp;</h1>
+					<h2 class="shadowed">Deploy VNFs and NSDs to target NFV Orchestrator !</h2>
+					<p>Onboard, manage and share VNFs and Network Services over the target infrastructure!</p>
+					<a href="nfvportal/" ><button type="button" class="btn btn-info">NFV Portal</button></a>
+					<h1>&nbsp;</h1>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<a href="nfvportal/"><img src="nfvo.png"></a>
+				</div>
+				
+			
+			</div>
+			<!--  ------------------------  END CONTENT      ------------------------      -->
+	</div>
+</div>
+
+
+</div>
+
+
+<div class="slide-animate">
+
+<section id="contact" style="background-color: #6c6c6c; color: #FFFFFF;">
+<br>
+	<div class="container">
+			<div class="row shadowed-dark">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<h2>Who we are</h2>
+							<address>
+                               <strong>openslice.io project</strong> | <a style="color:#FFFFFF;" href="http://openslice.io/">openslice.io</a><br>
+                                openslice.io an opensource OSS
+							</address>
+							<address>
+                             
+							
+
+
+
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					
+					<h2>Connect with us</h2>
+                            <div><a href="https://twitter.com/OpensliceOSS" style="color:#FFFFFF;"><i class="fa fa-twitter fa-2x" style="font-size:32px;"></i> Twitter</a></div>
+						
+				</div>
+				
+				<div class="col-xs-3 col-sm-6 col-md-3 col-lg-3">
+					
+					<h2>&nbsp</h2>					
+						
+						
+				</div>
+			</div>
+	</div>
+	<br><br>
+</section>
+
+
+<footer id="footer">
+			<section>
+				<div class="container">
+					<div class="row"> 
+							<div class="col-sm-12">
+							&nbsp;
+							</div>
+					</div>
+					<div class="row"> 
+							<div class="col-sm-12">
+								<img src="eu-commission.png"/>
+								<br>openslice.io has received funding from  
+								<br>5GinFIRE | https://5ginfire.eu/ project  from the European Horizon 2020 Programme for research, technological development and demonstration under grant agreement number 732497.
+								<br>5G-VINNI project | https://5g-vinni.eu/ 5G-VINNI project has received funding from the European Horizon 2020 Programme for research, technological development and demonstration under grant agreement number 815279 
+							</div>
+							<div class="col-sm-12">{{portalName}} running openslice.io| <a href="https://openslice.io/data-protection-declaration/" >Data Protection Declaration</a> | 
+							&copy; 2019-2020  on behalf of  <a target="_blank" href="http://openslice.io/" title="openslice.io">openslice.io</a> 
+							</div>  
+							
+					</div>
+					<div class="row"> 
+							<div class="col-sm-12">
+							&nbsp;
+							</div>
+					</div>
+				</div>
+				
+			</section>
+			
+</footer>
+
+</div>
+
+
+			
+</body>
+</html>
