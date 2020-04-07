@@ -14,7 +14,7 @@
 					<div class="form-group">
 						<label for="vfimage.name" class="col-sm-2 control-label"  >Name*</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control"  ng-model="vfimage.name" value="" placeholder="Image Name (will be used inside VxFs VDU)" ng-blur="checkVFImageName()"/>
+							<input type="text" class="form-control"  ng-model="vfimage.name" value="" placeholder="Image Name (will be used inside VNFs VDU)" ng-blur="checkVFImageName()"/>
 							<p class="help-block">Mandatory. Use a unique name e.g. <i>vendor_imageName_version</i> </p>
 							<p class="alert alert-danger" ng-show="nameExists" > Error. Image name is already registered in the repository</p>
 						</div>
