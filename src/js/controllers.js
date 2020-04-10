@@ -282,14 +282,18 @@ appControllers.controller('ExperimentListController', ['$scope','$window','$log'
 	 			if ( app.iconsrc.indexOf( 'unknown' ) !== -1 ){
 		    		app.iconsrc = "images/experiment.png";
 			  		console.log("app.iconsrc = " + app.iconsrc);
-			  	  } else {
+			  	} 
+	 			else 
+			  	{
 			  		app.iconsrc = APIEndPointService.APIURL + app.iconsrc;
-			  	  }
-
-	 			app.packageLocation = APIEndPointService.APIURL + app.packageLocation;
+		  		}
+	 			if (app.packageLocation.indexOf('http') == -1)
+ 				{
+	 				app.packageLocation = APIEndPointService.APIURL + app.packageLocation;
+ 				}
 	 		});
 
- 		  }); //query() returns all the subscribedresources
+ 		}); //query() returns all the subscribedresources
  		 
  	
  	
@@ -915,7 +919,10 @@ appControllers.controller('ExperimentViewController', ['$scope', '$route', '$rou
   		console.log("$scope.exprm.iconsrc = " + $scope.exprm.iconsrc);
   	  }else{
   		$scope.exprm.iconsrc = APIEndPointService.APIURL + $scope.exprm.iconsrc;
-  		$scope.exprm.packageLocation = APIEndPointService.APIURL + $scope.exprm.packageLocation;
+		if (scope.exprm.packageLocation.indexOf('http') == -1)
+		{
+			$scope.exprm.packageLocation = APIEndPointService.APIURL + $scope.exprm.packageLocation;
+		}
   	  }
   	
   	
@@ -1074,15 +1081,19 @@ appControllers.controller('VxFListController', ['$scope','$window','$log', 'Admi
  	$scope.vxfs= AdminVxFMetadata.query(function() {
 	 		angular.forEach( $scope.vxfs , function( vxf, appkey) {
 	    		
-	 			if ( vxf.iconsrc.indexOf( 'unknown' ) !== -1 ){
+	 			if ( vxf.iconsrc.indexOf( 'unknown' ) !== -1 )
+	 			{
 	 				vxf.iconsrc = "images/vxf.png";
-			  	  } else
-			  {
+	 			} 
+	 			else
+	 			{
 			  		vxf.iconsrc = APIEndPointService.APIURL + vxf.iconsrc;
-			  }
+		  		}
 	 			
-	 			vxf.packageLocation = APIEndPointService.APIURL + vxf.packageLocation;
-	 			
+	 			if (vxf.packageLocation.indexOf('http') == -1)
+ 				{
+	 				vxf.packageLocation = APIEndPointService.APIURL + vxf.packageLocation;
+ 				}	 					 			
 	 		});
  		  }); //query() returns all the subscribedresources
  		 
@@ -1508,7 +1519,7 @@ appControllers.controller('VxFEditController', ['$scope', '$route', '$routeParam
 			    	$scope.activevxfOnBoardedDescriptor = $scope.vxf.vxfOnBoardedDescriptors[ $scope.vxf.vxfOnBoardedDescriptors.length-1 ];
 				}
 			}, function errorCallback(response) {
-	            alert( response.statusText + " - Failed to update VxF! " + response.data["message"]  );
+	            alert( response.statusText + " - Failed to update VNF! " + response.data["message"]  );
 	        });
 		};
 		
