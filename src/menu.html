@@ -38,8 +38,8 @@
 							<ul class="dropdown-menu" role="menu">
 								<li ng-show="loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1" ><a href="#!/users">System Users</a></li>
 								<li><a ng-show="( (loggedinportaluser.roles.indexOf('ROLE_EXPERIMENTER')>-1 ) || (loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1)  )" href="#!/experiments">Registered NSDs</a></li>
-								<li><a ng-show="( (loggedinportaluser.roles.indexOf('ROLE_VXF_DEVELOPER')>-1 ) || (loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1)  )" href="#!/vxfs">Registered VNFs</a></li>
-								<li><a ng-show="( (loggedinportaluser.roles.indexOf('ROLE_VXF_DEVELOPER')>-1 ) || (loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1)  )" href="#!/vfimages">Registered Images</a></li>
+								<li><a ng-show="( (loggedinportaluser.roles.indexOf('ROLE_NFV_DEVELOPER')>-1 ) || (loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1)  )" href="#!/vxfs">Registered VNFs</a></li>
+								<li><a ng-show="( (loggedinportaluser.roles.indexOf('ROLE_NFV_DEVELOPER')>-1 ) || (loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1)  )" href="#!/vfimages">Registered Images</a></li>
 								<li><a ng-show="( (loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1 ) || (loggedinportaluser.roles.indexOf('ROLE_MENTOR')>-1)  )" href="#!/deployments_admin">Registered Deployed Experiments</a></li>
 								<li ng-show="loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1" class="divider"></li>
 								<li ng-show="loggedinportaluser.roles.indexOf('ROLE_ADMIN')>-1"><a href="#!/categories">Manage Categories</a></li>		
@@ -67,9 +67,11 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li ng-show="!loggedIn"><a href="#!/login" >Sign In</a></li>
 					<li ng-show="loggedIn" class="dropdown"><a href="" class="dropdown-toggle" 
-						data-toggle="dropdown">{{loggedinportaluser.name}}<span class="caret"></span></a>
+						data-toggle="dropdown">{{loggedinportaluser.firstname}} {{loggedinportaluser.lastname}}<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><span style="color: black;font-size: 1.0em;white-space: pre;">User: <b>{{loggedinportaluser.name}}</b></span>
+							<li><span style="color: black;font-size: 1.0em;white-space: pre;">Username: <b>{{loggedinportaluser.username}}</b></span>
+							<br>
+							<li><span style="color: black;font-size: 1.0em;white-space: pre;">User: <b>{{loggedinportaluser.firstname}} {{loggedinportaluser.lastname}}</b></span>
 							<br>
 							<li><span style="color: black;font-size: 1.0em;white-space: pre;">email: <b>{{loggedinportaluser.email}}</b></span>
 							<br>

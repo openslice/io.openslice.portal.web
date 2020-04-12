@@ -9,7 +9,7 @@ appConfig.factory('APIEndPointService', function() {
 		STATUS: "http://status.localhost/",
 		APIURL: "http://localhost",
 		WEBURL: "http://localhost",
-		APIOAUTHURL: "http://localhost/osapi-oauth-server",
+		APIOAUTHURL: "http://localhost:28080/auth/realms/openslice",
 		APITMFURL: "http://localhost/tmf-api/serviceCatalogManagement/v4"
 		
 	  };
