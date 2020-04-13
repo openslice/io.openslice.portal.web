@@ -283,7 +283,7 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
 		 var jsession = $cookieStore.get('JSESSIONID');
 		 $log.debug('========== > COOKIES jsession= '+  jsession);
 		 
-		 popup = $window.open( APIEndPointService.APIOAUTHURL + '/protocol/openid-connect/auth?client_id=osapiWebClientId&response_type=code&redirect_uri=' + APIEndPointService.WEBURL + '/oauthresp.html'  ,  '_blank' ,  "width=1024,height=500");
+		 popup = $window.open( APIEndPointService.APIOAUTHURL + '/protocol/openid-connect/auth?client_id=osapiWebClientId&response_type=code&redirect_uri=' + APIEndPointService.WEBURL + '/oauthresp.html'  ,  '_blank' ,  "width=1024,height=650");
 		 
 	    
 	  }
