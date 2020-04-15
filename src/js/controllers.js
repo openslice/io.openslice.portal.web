@@ -2153,7 +2153,7 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
         	
         	        	
         	link = APIEndPointService.WEBURL+'/#!/registerconfirm?rid=APIKEY_REPLACE&uname='+$scope.portaluser.username;
-            msg='Dear '+$scope.portaluser.name+' <br>thank you for registering an account!<br><br>\r\n'+
+            msg='Dear '+$scope.portaluser.firstname+ ' ' +$scope.portaluser.lastname+ ' <br>thank you for registering an account!<br><br>\r\n'+
             'Please follow this link:<br> '+link+
             ' <br> or copy it to your web browser\r\n'+
             '<br><br>Thank you\r\nThe portal team';
