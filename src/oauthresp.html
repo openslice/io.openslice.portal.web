@@ -28,13 +28,14 @@
 	
 <script>
        function change() {
-            	
-        	window.opener.fromauthwindow( window.location.href );
-        	window.close();
-        	//window.testmethod( window.location.href );
+             if ( window.opener == null ) {
+                        window.fromauthwindow( window.location.href );
+                }else{
+                        window.opener.fromauthwindow( window.location.href );
+                        window.close();
+                        //window.testmethod( window.location.href );
+                }
       }
-
-
 
     </script>
         
