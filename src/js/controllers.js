@@ -1735,8 +1735,8 @@ appControllers.controller('VxFsMarketplaceController', ['$scope','$window','$log
 
 //////////Deployments controller
 
-appControllers.controller('DeploymentsListController', ['$scope','$window','$log', 'DeploymentDescriptor', 'popupService','ngDialog','$http', 'APIEndPointService',
-                                             	function($scope, $window, $log, DeploymentDescriptor, popupService, ngDialog, $http, APIEndPointService ) {
+appControllers.controller('DeploymentsListController', ['$scope','$window','$log', 'DeploymentDescriptor', 'popupService','ngDialog','$http', 'APIEndPointService', '$mdDialog',
+                                             	function($scope, $window, $log, DeploymentDescriptor, popupService, ngDialog, $http, APIEndPointService, $mdDialog ) {
                  	
                  	
 // 	$scope.mydeployments= DeploymentDescriptor.query(function() {
@@ -1758,7 +1758,28 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
         });
 	};
 
-
+	$scope.showAlert = function(ev) {
+	    // Appending dialog to document.body to cover sidenav in docs app
+	    // Modal dialogs should fully cover application
+	    // to prevent interaction outside of dialog
+	    $mdDialog.show({
+	     	parent: angular.element(document.body),
+	     	clickOutsideToClose:true,	     	
+	     	template:
+	       	'<h2>NSR JSON</h2><md-button ng-click="closeDialog();">Close Window</md-button><pre>' +JSON.stringify(JSON.parse(ev), null, "\t") + '</pre><md-button ng-click="closeDialog();">Close Window</md-button>',
+	    	locals: {
+	      	
+	    	},
+	    	controller: DialogController
+		  });
+		  	
+		  function DialogController($scope, $mdDialog) {
+		    $scope.closeDialog = function() {
+		      $mdDialog.hide();
+		    };
+		  };
+	  };	
+	  
 	mydeployments();
  	          	
 	
@@ -1935,8 +1956,8 @@ appControllers.controller('DeploymentAddController', ['$scope', '$route', '$root
 
 
 
-appControllers.controller('DeploymentsAdminListController', ['$scope','$window','$log', 'DeploymentDescriptor', 'popupService','ngDialog','$http', 'APIEndPointService',
-                                             	function($scope, $window, $log, DeploymentDescriptor, popupService, ngDialog, $http, APIEndPointService ) {
+appControllers.controller('DeploymentsAdminListController', ['$scope','$window','$log', 'DeploymentDescriptor', 'popupService','ngDialog','$http', 'APIEndPointService', '$mdDialog',
+                                             	function($scope, $window, $log, DeploymentDescriptor, popupService, ngDialog, $http, APIEndPointService, $mdDialog ) {
                  	
                  	
  	$scope.mydeployments= DeploymentDescriptor.query(function() {
@@ -1967,6 +1988,27 @@ appControllers.controller('DeploymentsAdminListController', ['$scope','$window',
 		  });  
 	 }; 
  		 
+	$scope.showAlert = function(ev) {
+	    // Appending dialog to document.body to cover sidenav in docs app
+	    // Modal dialogs should fully cover application
+	    // to prevent interaction outside of dialog
+	    $mdDialog.show({
+	     	parent: angular.element(document.body),
+	     	clickOutsideToClose:true,	     	
+	     	template:
+	       	'<h2>NSR JSON</h2><md-button ng-click="closeDialog();">Close Window</md-button><pre>' +JSON.stringify(JSON.parse(ev), null, "\t") + '</pre><md-button ng-click="closeDialog();">Close Window</md-button>',
+	    	locals: {
+	      	
+	    	},
+	    	controller: DialogController
+		  });
+		  	
+		  function DialogController($scope, $mdDialog) {
+		    $scope.closeDialog = function() {
+		      $mdDialog.hide();
+		    };
+		  };
+	  };	
  	
  	 $scope.deleteDeployment = function(gridItem, depidx){
 
@@ -2153,7 +2195,7 @@ appControllers.controller('SignupCtrl', ['$scope', '$route', '$routeParams', '$l
         	
         	        	
         	link = APIEndPointService.WEBURL+'/#!/registerconfirm?rid=APIKEY_REPLACE&uname='+$scope.portaluser.username;
-            msg='Dear '+$scope.portaluser.firstname+ ' ' +$scope.portaluser.lastname+ ' <br>thank you for registering an account!<br><br>\r\n'+
+            msg='Dear '+$scope.portaluser.name+' <br>thank you for registering an account!<br><br>\r\n'+
             'Please follow this link:<br> '+link+
             ' <br> or copy it to your web browser\r\n'+
             '<br><br>Thank you\r\nThe portal team';

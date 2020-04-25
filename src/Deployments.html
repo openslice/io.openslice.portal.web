@@ -20,8 +20,7 @@
 				
 				
 				<table id="grid1" tr-ng-grid="" class="usersGrid" items="mydeployments" page-items="50"
-					fields="['id', 'name',  'experiment.name','dateCreated', 'startReqDate', 'endReqDate', 'startDate', 'endDate', 'description', 'feedback', 'mentor.name' , 'operationalStatus', 'configStatus', 'detailedStatus', 'constituentVnfrIps' ]">
-					
+					fields="['id', 'name',  'experiment.name','dateCreated', 'startReqDate', 'endReqDate', 'startDate', 'endDate', 'description', 'feedback', 'mentor.name' , 'operationalStatus', 'configStatus', 'detailedStatus', 'constituentVnfrIps' ]">					
 					<thead>
 						<tr>
 							<th field-name="id" display-name="Id" cell-width="5em"display-align="right"></th>
@@ -34,21 +33,18 @@
 			                <th field-name="operationalStatus" display-name="Operational Status">
 			                <th field-name="configStatus" display-name="Config Status">
 			                <th field-name="detailedStatus" display-name="Detailed Status">
-			                <th field-name="constituentVnfrIps" display-name="VNF IPs">
-			                
+			                <th field-name="constituentVnfrIps" display-name="VNF Mgmt IPs">
 							<th>
 			                    <div class="tr-ng-title">
 			                        Status
 			                    </div>
 			                </th>
-							
-							
+													
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							
-							<td nowrap="nowrap" >
+							<td>
 								<h4>									
 									<span  ng-class="{label:true, 'label-primary': gridItem.status === 'UNDER_REVIEW', 
 									'label-success': gridItem.status === 'SCHEDULED', 
@@ -62,14 +58,25 @@
 									'label-deletion-failed': gridItem.status === 'DELETION_FAILED',
 									'label-warning': gridItem.status === 'FAILED',
 									'label-failed-osm-removed': gridItem.status === 'FAILED_OSM_REMOVED'									
-									}" >{{gridItem.status}}</span>																		
+									}" >{{gridItem.status}}</span>									
 								</h4>
-							</td>
+	   						   <md-button class="md-primary md-raised" ng-click="showAlert(gridItem.nsr)"   >
+	      							Show NSR JSON
+	    						</md-button>						
+								<md-button class="md-primary md-raised" ng-click="showAlert(gridItem.ns_nslcm_details)"   >
+	      							Show NSLCM JSON
+	    						</md-button>
+							</td>				                							
+							<td nowrap="nowrap" >
+								<a class="btn btn-danger" ng-click="deleteDeployment(gridItem, gridItem.id)"><i class="fa fa-trash-o "></i></a>
+								<a class="btn btn-primary" ng-href="#!/edit_deployment/{{gridDisplayItem.id}}"><i class="fa fa-pencil-square-o "></i></a>			
+							</td>							
 						</tr>	
 					</tbody>
 				</table>
-
+				<div class='modal'> Show this modal </div>
 			</div>
 		</div>
 	</div>
 </div>
+

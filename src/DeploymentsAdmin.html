@@ -25,15 +25,14 @@
 							<th field-name="id" display-name="Id" cell-width="5em"display-align="right"></th>
 							<th field-name="name" display-name="Name"></th>
 			                <th field-name="dateCreated" display-name="Requested at Local Time" display-format="date:'dd-MM-yyyy HH:mm:ss'">
-			                <th field-name="startReqDate" display-name="Requested Local Time Start" display-format="date:'dd-MM-yyyy HH:mm:ss'">
-			                <th field-name="endReqDate" display-name="Requested Local Time End" display-format="date:'dd-MM-yyyy HH:mm:ss'">
+			                <th field-name="startReqDate" display-name="Requested Local Start Time" display-format="date:'dd-MM-yyyy HH:mm:ss'">
+			                <th field-name="endReqDate" display-name="Requested Local End Time" display-format="date:'dd-MM-yyyy HH:mm:ss'">
 			                <th field-name="startDate" display-name="Start Local Time" display-format="date:'dd-MM-yyyy HH:mm:ss'">
 			                <th field-name="endDate" display-name="End Local Time" display-format="date:'dd-MM-yyyy HH:mm:ss'">
 			                <th field-name="operationalStatus" display-name="Operational Status">
 			                <th field-name="configStatus" display-name="Config Status">
 			                <th field-name="detailedStatus" display-name="Detailed Status">
 			                <th field-name="constituentVnfrIps" display-name="VNF IPs">
-
 			                <th field-name="owner">
 							<th>
 			                    <div class="tr-ng-title">
@@ -47,8 +46,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							
-							<td nowrap="nowrap" >
+							<td>
 								<h4>									
 									<span  ng-class="{label:true, 'label-primary': gridItem.status === 'UNDER_REVIEW', 
 									'label-success': gridItem.status === 'SCHEDULED', 
@@ -64,7 +62,13 @@
 									'label-failed-osm-removed': gridItem.status === 'FAILED_OSM_REMOVED'									
 									}" >{{gridItem.status}}</span>									
 								</h4>
-							</td>				
+	   						   <md-button class="md-primary md-raised" ng-click="showAlert(gridItem.nsr)"   >
+	      							Show NSR JSON
+	    						</md-button>						
+								<md-button class="md-primary md-raised" ng-click="showAlert(gridItem.ns_nslcm_details)"   >
+	      							Show NSLCM JSON
+	    						</md-button>
+							</td>			
 							<td nowrap="nowrap" >
 								<a class="btn btn-danger" ng-click="deleteDeployment(gridItem, gridItem.id)"><i class="fa fa-trash-o "></i></a>
 								<a class="btn btn-primary" ng-href="#!/edit_deployment/{{gridDisplayItem.id}}"><i class="fa fa-pencil-square-o "></i></a>			
@@ -72,7 +76,7 @@
 						</tr>
 					</tbody>
 				</table>
-
+				<div class='modal'> Show this modal </div>
 			</div>
 		</div>
 	</div>
