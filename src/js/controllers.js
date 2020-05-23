@@ -310,11 +310,12 @@ appControllers.controller('ExperimentListController', ['$scope','$window','$log'
  		        	app.$delete(function(){
  		    			$scope.apps.splice($scope.apps.indexOf(gridItem),1)
  		            }, function errorCallback(response) {
-  		               alert( response.statusText + " - Failed to delete! " + response.data["message"]  );
+  		               alert( "Status:" + response.status + " - Failed to delete NSD! " + response.data["detail"]  );
   		           });
  		        
  		        }
  		 	});
+ 		 	
  	    }
  	          	
                  	 
@@ -1112,7 +1113,7 @@ appControllers.controller('VxFListController', ['$scope','$window','$log', 'Admi
  		        	vxf.$delete(function(){
  		    			$scope.vxfs.splice($scope.vxfs.indexOf(gridItem),1)
  		            }, function errorCallback(response) {
- 		               alert( response.statusText + " - Failed to delete! " + response.data["message"]  );
+   		               alert( "Status:" + response.status + " - Failed to delete VNF! " + response.data["detail"]  );
  		           });
  		        
  		        }
@@ -1845,10 +1846,10 @@ appControllers.filter("dateComputedField", function () {
 
 appControllers.controller('DeploymentAddController', ['$scope', '$route', '$rootScope', '$routeParams','$window','$log', 
                                                             'DeploymentDescriptor', 'ExperimentMetadata', 'DeployContainer','DeployArtifact',
-                                                            'SubscribedResource', '$filter', '$http', 'APIEndPointService', '$location', 'Infrastructure', 'DeployableExperimentMetadata', 'PortalUser', 'MentorUser',
+                                                            'SubscribedResource', '$filter', '$http', 'APIEndPointService', '$location', 'Infrastructure', 'DeployableExperimentMetadata', 'ExperimentOBDs', 'PortalUser', 'MentorUser',
                                              	function($scope, $route, $rootScope, $routeParams, $window, $log, DeploymentDescriptor, 
                                              			ExperimentMetadata, DeployContainer, DeployArtifact,  SubscribedResource , 
-                                             			$filter, $http, APIEndPointService, $location, Infrastructure, DeployableExperimentMetadata, PortalUser, MentorUser) {
+                                             			$filter, $http, APIEndPointService, $location, Infrastructure, DeployableExperimentMetadata, ExperimentOBDs, PortalUser, MentorUser) {
                  	
 	function addZero(i) {
 		  if (i < 10) {
@@ -1868,6 +1869,10 @@ appControllers.controller('DeploymentAddController', ['$scope', '$route', '$root
 		    $scope.experiments = orderBy($scope.experiments, 'name', false);
  	}); 
  	
+ 	$scope.experimentobds = ExperimentOBDs.query(function() { 		    
+	    $scope.experimentobds = orderBy($scope.experimentobds, 'name', false);
+	}); 
+	
 	$scope.mentorusers = MentorUser.query(function() { 
 		$scope.mentorusers = orderBy($scope.mentorusers, 'name', false);
 	}); 		  	
@@ -1911,6 +1916,14 @@ appControllers.controller('DeploymentAddController', ['$scope', '$route', '$root
 			$scope.newdeployment.vxfPlacements.push( placement );			 			 			 
 		 });  		
 	}
+	
+//	$scope.updateOBDs = function() {
+//  		console.log("newdeployment.experiment = " + $scope.newdeployment.experiment );
+//  				
+//	 	$scope.experimentobds = ExperimentOBDs.query(function() { 		    
+//		    $scope.experimentobds = orderBy($scope.experimentobds, 'name', false);
+//		}); 		
+//	}
 	       
     $scope.submitNewAppDeployment = function submit() {
 		 

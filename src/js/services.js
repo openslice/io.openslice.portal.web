@@ -138,6 +138,21 @@ appServices.factory('DeployableExperimentMetadata', function($resource, APIEndPo
 	
 });
 
+//experiments Resource
+appServices.factory('ExperimentOBDs', function($resource, APIEndPointService) {
+	
+	return $resource(APIEndPointService.APIURL+"/osapi/admin/experimentobds/deployable", 
+			{ id: '@id' }, {				
+		
+		    update: {
+		        method: 'PUT' // this method issues a PUT request      	
+		      	}
+	});
+	
+});
+
+
+
 
 appServices.factory('Container', function() {
 	
