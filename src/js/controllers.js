@@ -1759,7 +1759,7 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
         });
 	};
 
-	$scope.showAlert = function(ev) {
+	$scope.showNSRJSON = function(ev) {
 	    // Appending dialog to document.body to cover sidenav in docs app
 	    // Modal dialogs should fully cover application
 	    // to prevent interaction outside of dialog
@@ -1780,6 +1780,83 @@ appControllers.controller('DeploymentsListController', ['$scope','$window','$log
 		    };
 		  };
 	  };	
+
+		$scope.showNSLCMHistory = function(ev) {
+		    // Appending dialog to document.body to cover sidenav in docs app
+		    // Modal dialogs should fully cover application
+		    // to prevent interaction outside of dialog
+		    $mdDialog.show({
+		     	parent: angular.element(document.body),
+		     	clickOutsideToClose:true,	     	
+		     	template:
+		       	'<h2>NSLCM JSON</h2><md-button ng-click="closeDialog();">Close Window</md-button><pre>' +JSON.stringify(JSON.parse(ev), null, "\t") + '</pre><md-button ng-click="closeDialog();">Close Window</md-button>',
+		    	locals: {
+		      	
+		    	},
+		    	controller: DialogController
+			  });
+			  	
+			  function DialogController($scope, $mdDialog) {
+			    $scope.closeDialog = function() {
+			      $mdDialog.hide();
+			    };
+			  };
+		  };	
+
+		$scope.showSubmitAction = function(gridItem, depidx) {
+		    // Appending dialog to document.body to cover sidenav in docs app
+		// Modal dialogs should fully cover application
+		// to prevent interaction outside of dialog
+		$mdDialog.show({
+		 	parent: angular.element(document.body),
+		 	clickOutsideToClose:true,	     	
+		 	template:
+		   	'<h2>Submit Action</h2><md-button ng-click="closeDialog();">Close Window</md-button><pre><form ng-submit="submit()"> Enter action payload and hit enter:<p><textarea id="textarea1" cols="80" rows="10" ng-model="myTextArea">'+$scope.myTextArea+'</textarea></p><input type="submit" id="submit" value="Submit Action" /></form></pre><md-button ng-click="closeDialog();">Close Window</md-button>',
+		    	locals: {
+		      	
+		    	},
+		    	controller: DialogController
+			  });	  	
+			  function DialogController($scope, $mdDialog) {
+				//Example: var obj={ "nsInstanceId":"depidx", "member_vnf_index" : "1", "primitive" : "touch", "primitive_params" : {"filename" : "/home/ubuntu/osmclienttest2" } };
+				var obj={ "nsInstanceId":"depidx", "member_vnf_index" : "?", "primitive" : "?", "primitive_params" : {"?" : "?" } };
+				obj.nsInstanceId=depidx;
+		    	$scope.myTextArea=JSON.stringify(obj , null, "\t");
+			    $scope.closeDialog = function() {
+			      $mdDialog.hide();
+			    };
+			    $scope.submit = function() {
+			        if ($scope.myTextArea) {
+			        	//Show sent payload
+			        	//alert($scope.myTextArea);
+				        $mdDialog.hide();
+			        	return $http({
+			    			method : 'POST',
+			    			url : APIEndPointService.APIURL+'/osapi/admin/experimentobds/action/',
+			    			headers : {
+			    				'Content-Type' : 'application/json'
+			    			},
+			    			data : $scope.myTextArea,
+			    		}).then(function( response ) {
+			    			alert("The action request is sent to the OSM. Response: " + JSON.stringify(response.data));
+			    			$location.path("/");
+			    		},
+				        function errorCallback(response) {
+				            alert( response.statusText +  "Failed to complete action. Response: " + JSON.stringify(response.data) ); //+ error.data
+				        }); 
+			        	
+			        }
+			      };		    
+			  };
+		  };	
+		  
+		  $scope.enableSubmitActionFun = function(value) {
+			  if(value=='RUNNING')
+				  return true;
+			  else
+				  return false;
+		  }
+		  
 	  
 	mydeployments();
  	          	
@@ -1973,35 +2050,55 @@ appControllers.controller('DeploymentsAdminListController', ['$scope','$window',
                                              	function($scope, $window, $log, DeploymentDescriptor, popupService, ngDialog, $http, APIEndPointService, $mdDialog ) {
                  	
                  	
- 	$scope.mydeployments= DeploymentDescriptor.query(function() {
- 		    
- 		  }); 
- 	
- 	$scope.showActiveDeployments = function () {
+	$scope.mydeployments= DeploymentDescriptor.query(function() {
+		    
+		  }); 
+	
+	$scope.showActiveDeployments = function () {
 			$scope.mydeployments= DeploymentDescriptor.query(function() {
 		    
 	  });  
- 	}; 
- 	
- 	$scope.showCompletedDeployments = function () {
- 			$scope.mydeployments= DeploymentDescriptor.query({status:"COMPLETED"},function() {
- 		    
+	}; 
+	
+	$scope.showCompletedDeployments = function () {
+			$scope.mydeployments= DeploymentDescriptor.query({status:"COMPLETED"},function() {
+		    
 		  });  
 	 }; 
- 	
- 	$scope.showRejectedDeployments = function () {
- 			$scope.mydeployments= DeploymentDescriptor.query({status:"REJECTED"},function() {
- 		    
+	
+	$scope.showRejectedDeployments = function () {
+			$scope.mydeployments= DeploymentDescriptor.query({status:"REJECTED"},function() {
+		    
 		  });  
 	 }; 
- 	
- 	$scope.showFailedDeployments = function () {
- 			$scope.mydeployments= DeploymentDescriptor.query({status:"FAILED_OSM_REMOVED"},function() {
- 		    
+	
+	$scope.showFailedDeployments = function () {
+			$scope.mydeployments= DeploymentDescriptor.query({status:"FAILED_OSM_REMOVED"},function() {
+		    
 		  });  
 	 }; 
  		 
-	$scope.showAlert = function(ev) {
+	$scope.showNSRJSON = function(ev) {
+	    // Appending dialog to document.body to cover sidenav in docs app
+		// Modal dialogs should fully cover application
+		// to prevent interaction outside of dialog
+		$mdDialog.show({
+		 	parent: angular.element(document.body),
+		 	clickOutsideToClose:true,	     	
+		 	template:'<h2>NSR JSON</h2><md-button ng-click="closeDialog();">Close Window</md-button><pre>' +JSON.stringify(JSON.parse(ev), null, "\t") + '</pre><md-button ng-click="closeDialog();">Close Window</md-button>',
+	    	locals: {      	
+		    	},
+		    	controller: DialogController
+			  });
+			  	
+			  function DialogController($scope, $mdDialog) {
+			    $scope.closeDialog = function() {
+			      $mdDialog.hide();
+		      };
+		  };
+	};	
+
+	$scope.showNSLCMHistory = function(ev) {
 	    // Appending dialog to document.body to cover sidenav in docs app
 	    // Modal dialogs should fully cover application
 	    // to prevent interaction outside of dialog
@@ -2009,7 +2106,7 @@ appControllers.controller('DeploymentsAdminListController', ['$scope','$window',
 	     	parent: angular.element(document.body),
 	     	clickOutsideToClose:true,	     	
 	     	template:
-	       	'<h2>NSR JSON</h2><md-button ng-click="closeDialog();">Close Window</md-button><pre>' +JSON.stringify(JSON.parse(ev), null, "\t") + '</pre><md-button ng-click="closeDialog();">Close Window</md-button>',
+	       	'<h2>NSLCM JSON</h2><md-button ng-click="closeDialog();">Close Window</md-button><pre>' +JSON.stringify(JSON.parse(ev), null, "\t") + '</pre><md-button ng-click="closeDialog();">Close Window</md-button>',
 	    	locals: {
 	      	
 	    	},
@@ -2022,7 +2119,61 @@ appControllers.controller('DeploymentsAdminListController', ['$scope','$window',
 		    };
 		  };
 	  };	
- 	
+
+	$scope.showSubmitAction = function(gridItem, depidx) {
+	    // Appending dialog to document.body to cover sidenav in docs app
+	// Modal dialogs should fully cover application
+	// to prevent interaction outside of dialog
+	$mdDialog.show({
+	 	parent: angular.element(document.body),
+	 	clickOutsideToClose:true,	     	
+	 	template:
+	   	'<h2>Submit Action</h2><md-button ng-click="closeDialog();">Close Window</md-button><pre><form ng-submit="submit()"> Enter action payload and hit enter:<p><textarea id="textarea1" cols="80" rows="10" ng-model="myTextArea">'+$scope.myTextArea+'</textarea></p><input type="submit" id="submit" value="Submit Action" /></form></pre><md-button ng-click="closeDialog();">Close Window</md-button>',
+	    	locals: {
+	      	
+	    	},
+	    	controller: DialogController
+		  });	  	
+		  function DialogController($scope, $mdDialog) {
+			//Example: var obj={ "nsInstanceId":"depidx", "member_vnf_index" : "1", "primitive" : "touch", "primitive_params" : {"filename" : "/home/ubuntu/osmclienttest2" } };
+			var obj={ "nsInstanceId":"depidx", "member_vnf_index" : "?", "primitive" : "?", "primitive_params" : {"?" : "?" } };
+			obj.nsInstanceId=depidx;
+	    	$scope.myTextArea=JSON.stringify(obj , null, "\t");
+		    $scope.closeDialog = function() {
+		      $mdDialog.hide();
+		    };
+		    $scope.submit = function() {
+		        if ($scope.myTextArea) {
+		        	//Show sent payload
+		        	//alert($scope.myTextArea);
+			        $mdDialog.hide();
+		        	return $http({
+		    			method : 'POST',
+		    			url : APIEndPointService.APIURL+'/osapi/admin/experimentobds/action/',
+		    			headers : {
+		    				'Content-Type' : 'application/json'
+		    			},
+		    			data : $scope.myTextArea,
+		    		}).then(function( response ) {
+		    			alert("The action request is sent to the OSM. Response: "+ JSON.stringify(response.data));
+		    			$location.path("/");
+		    		},
+			        function errorCallback(response) {
+			            alert( response.statusText +  "Failed to complete action. Response: " + JSON.stringify(response.data) ); //+ error.data
+			        }); 
+		        	
+		        }
+		      };		    
+		  };
+	  };	
+		  
+	  $scope.enableSubmitActionFun = function(value) {
+		  if(value=='RUNNING')
+			  return true;
+		  else
+			  return false;
+	  }
+			  
  	 $scope.deleteDeployment = function(gridItem, depidx){
 
  		$log.debug("Selected to DELETE Deployment with id = "+ depidx);

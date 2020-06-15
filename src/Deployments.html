@@ -60,11 +60,14 @@
 									'label-failed-osm-removed': gridItem.status === 'FAILED_OSM_REMOVED'									
 									}" >{{gridItem.status}}</span>									
 								</h4>
-	   						   <md-button class="md-primary md-raised" ng-click="showAlert(gridItem.nsr)"   >
+	   						   <md-button class="md-primary md-raised" ng-click="showNSRJSON(gridItem.nsr)" >
 	      							Show NSR JSON
 	    						</md-button>						
-								<md-button class="md-primary md-raised" ng-click="showAlert(gridItem.ns_nslcm_details)"   >
+								<md-button class="md-primary md-raised" ng-click="showNSLCMHistory(gridItem.ns_nslcm_details)"  >
 	      							Show NSLCM JSON
+	    						</md-button>
+								<md-button class="md-primary md-raised" ng-click="showSubmitAction(gridItem, gridItem.instanceId)" ng-show="enableSubmitActionFun(gridItem.status)" >	    						
+	      							Submit Action
 	    						</md-button>
 							</td>				                							
 							<td nowrap="nowrap" >
