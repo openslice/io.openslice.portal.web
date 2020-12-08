@@ -267,7 +267,16 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
     	};
     
     $scope.returnurl = $location.absUrl();
-    
+
+
+	$scope.baseUrl = new $window.URL($location.absUrl()).origin;
+
+    APIEndPointService.BUGZILLA = APIEndPointService.BUGZILLA.replace("ROOTURL", $scope.baseUrl);
+    APIEndPointService.STATUS = APIEndPointService.STATUS.replace("ROOTURL", $scope.baseUrl);
+    APIEndPointService.WEBURL = APIEndPointService.WEBURL.replace("ROOTURL", $scope.baseUrl);
+    APIEndPointService.APIOAUTHURL = APIEndPointService.APIOAUTHURL.replace("ROOTURL", $scope.baseUrl);
+    APIEndPointService.APIURL = APIEndPointService.APIURL.replace("ROOTURL", $scope.baseUrl);
+    APIEndPointService.APITMFURL = APIEndPointService.APITMFURL.replace("ROOTURL", $scope.baseUrl);
 
     $rootScope.portalName = APIEndPointService.TITLE;
     $rootScope.portalwiki = APIEndPointService.WIKI;
