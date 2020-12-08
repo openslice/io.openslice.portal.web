@@ -270,6 +270,7 @@ app.controller("LoginCtrl", ["$scope", "$location", "$window", "authenticationSv
 
 
 	$scope.baseUrl = new $window.URL($location.absUrl()).origin;
+	$log.debug('========== > $scope.baseUrl= '+  $scope.baseUrl);
 
     APIEndPointService.BUGZILLA = APIEndPointService.BUGZILLA.replace("ROOTURL", $scope.baseUrl);
     APIEndPointService.STATUS = APIEndPointService.STATUS.replace("ROOTURL", $scope.baseUrl);
