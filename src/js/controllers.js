@@ -1923,10 +1923,10 @@ appControllers.filter("dateComputedField", function () {
 
 appControllers.controller('DeploymentAddController', ['$scope', '$route', '$rootScope', '$routeParams','$window','$log', 
                                                             'DeploymentDescriptor', 'ExperimentMetadata', 'DeployContainer','DeployArtifact',
-                                                            'SubscribedResource', '$filter', '$http', 'APIEndPointService', '$location', 'Infrastructure', 'DeployableExperimentMetadata', 'ExperimentOBDs', 'PortalUser', 'MentorUser',
+                                                            'SubscribedResource', '$filter', '$http', 'APIEndPointService', '$location', 'Infrastructure', 'DeployableExperimentMetadata', 'ExperimentOBDs', 'PortalUser', 'MentorUser', 'AdminMANOprovider', 'AdminMANOplatform',
                                              	function($scope, $route, $rootScope, $routeParams, $window, $log, DeploymentDescriptor, 
                                              			ExperimentMetadata, DeployContainer, DeployArtifact,  SubscribedResource , 
-                                             			$filter, $http, APIEndPointService, $location, Infrastructure, DeployableExperimentMetadata, ExperimentOBDs, PortalUser, MentorUser) {
+                                             			$filter, $http, APIEndPointService, $location, Infrastructure, DeployableExperimentMetadata, ExperimentOBDs, PortalUser, MentorUser, AdminMANOprovider, AdminMANOplatform) {
                  	
 	function addZero(i) {
 		  if (i < 10) {
@@ -1945,7 +1945,14 @@ appControllers.controller('DeploymentAddController', ['$scope', '$route', '$root
  	$scope.experiments = DeployableExperimentMetadata.query(function() { 		    
 		    $scope.experiments = orderBy($scope.experiments, 'name', false);
  	}); 
- 	
+ 	$scope.manoproviders = AdminMANOprovider.query(function() {
+ 		    //console.log($scope.categories);
+ 		  }); //query() returns all the categories
+
+ 	$scope.manoplatforms = AdminMANOplatform.query(function() {
+ 		    //console.log($scope.categories);
+ 		  }); //query() returns all the categories
+ 		 
  	$scope.experimentobds = ExperimentOBDs.query(function() { 		    
 	    $scope.experimentobds = orderBy($scope.experimentobds, 'name', false);
 	}); 

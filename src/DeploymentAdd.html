@@ -8,16 +8,23 @@
 				<form class="form-horizontal" name="form" role="form" ng-submit="submitNewAppDeployment()" id="addApplicationForm">
 				
 					<div class="form-group">
+						<label for="app.name" class="col-sm-2 control-label">MP</label>
+						<div class="col-sm-10">
+							<select class="form-control" ng-model="newdeployment.mp" ng-options="e.name for e in manoplatforms" required><option></option></select>
+						</div>
+					</div>
+
+					<div class="form-group">
 						<label for="app.name" class="col-sm-2 control-label">NSD</label>
 						<div class="col-sm-10">
-							<select class="form-control" ng-model="newdeployment.experiment" ng-options="e.name +' (By: '+ e.owner.name + ' - Public: '+ e.published+' )' for e in experiments" ng-change="updatePlacements()" required><option></option></select>
+							<select class="form-control" ng-model="newdeployment.experiment" ng-options="e.packagingFormat +'/'+ e.name +' (By: '+ e.owner.name + ' - Public: '+ e.published+' )' for e in experiments  | filter: {packagingFormat:newdeployment.mp.name}" ng-change="updatePlacements()" required><option></option></select>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="app.name" class="col-sm-2 control-label">NSDOBDs</label>
 						<div class="col-sm-10">
-							<select class="form-control" ng-model="newdeployment.obd" ng-options="e.experimentMANOProviderID+'/'+newdeployment.experiment.name+', NSD OSM ID:'+e.deployId for e in experimentobds | filter: newdeployment.experiment.name"><option></option></select>
+							<select class="form-control" ng-model="newdeployment.obd" ng-options="e.obMANOprovider.supportedMANOplatform.name+'/'+e.obMANOprovider.name+'/'+e.experimentMANOProviderID+'/'+newdeployment.experiment.name+', NSD OSM ID:'+e.deployId for e in experimentobds | filter: {experimentMANOProviderID:newdeployment.experiment.name} | filter:newdeployment.mp.name"><option></option></select>
 						</div>
 					</div>
 
@@ -31,7 +38,7 @@
 					<div class="form-group">
 						<label for="app.name" class="col-sm-2 control-label">Infrastructure</label>
 						<div class="col-sm-10">
-							<select class="form-control" ng-model="newdeployment.infrastructureForAll" ng-options="e.name+', VIM id:'+ e.vimid  for e in infrastructures"  ng-change="updatePlacements()" required><option></option></select>
+							<select class="form-control" ng-model="newdeployment.infrastructureForAll" ng-options="e.mp.name+'/'+e.name+', VIM id:'+ e.vimid  for e in infrastructures| filter:newdeployment.obd.obMANOprovider.name"  ng-change="updatePlacements()" required><option></option></select>
 							<p class="help-block">Select Infrastructure to place all constituent VNFs</p>
 						</div>
 					</div>
@@ -48,7 +55,7 @@
 							      </tr>
 							      <tr class="" ng-repeat="ext in newdeployment.vxfPlacements">
 							        <td>{{ext.constituentVxF.vnfdidRef}} [ membervnfIndex:{{ext.constituentVxF.membervnfIndex}} ]</td>
-							        <td> <select class="form-control" ng-model="ext.infrastructure" ng-options="e.name for e in infrastructures" ng-required="true" required><option></option></select>
+							        <td> <select class="form-control" ng-model="ext.infrastructure" ng-options="e.mp.name+'/'+e.name+', VIM id:'+ e.vimid  for e in infrastructures| filter:newdeployment.obd.obMANOprovider.name" ng-required="true" required><option></option></select>
 							         </td>
 							       
 							      </tr>
