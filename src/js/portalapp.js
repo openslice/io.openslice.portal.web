@@ -8,7 +8,7 @@ var app = angular.module('portalapp', [   'ngCookies', 'ngResource', 'ngRoute',
                                          'angular-loading-bar', 'ngAnimate' ]);
 
 
-var portalversion = '1.0.2-SNAPSHOT';
+var portalversion = '1.1.0-SNAPSHOT';
 
 app.config(function($routeProvider, $locationProvider, $anchorScrollProvider, cfpLoadingBarProvider) {
 	
