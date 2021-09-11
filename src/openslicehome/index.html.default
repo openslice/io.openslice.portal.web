@@ -206,14 +206,8 @@
 							</div>
 					</div>
 					<div class="row"> 
-							<div class="col-sm-12">
-								<img src="eu-commission.png"/>
-								<br>openslice.io has received funding from  
-								<br>5GinFIRE | https://5ginfire.eu/ project  from the European Horizon 2020 Programme for research, technological development and demonstration under grant agreement number 732497.
-								<br>5G-VINNI project | https://5g-vinni.eu/ 5G-VINNI project has received funding from the European Horizon 2020 Programme for research, technological development and demonstration under grant agreement number 815279 
-							</div>
 							<div class="col-sm-12">{{portalName}} running openslice.io| <a href="https://openslice.io/data-protection-declaration/" >Data Protection Declaration</a> | 
-							&copy; 2019-2020  on behalf of  <a target="_blank" href="http://openslice.io/" title="openslice.io">openslice.io</a> 
+							&copy; 2019-2021  on behalf of  <a target="_blank" href="http://openslice.io/" title="openslice.io">openslice.io</a> 
 							</div>  
 							
 					</div>
