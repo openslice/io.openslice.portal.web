@@ -3,14 +3,14 @@ var appConfig = angular.module('portalwebapp.config',[]);
 
 appConfig.factory('APIEndPointService', function() {
 	  return {	      
-		TITLE: "Openslice demo",
-		WIKI: "http://localhost",
-		BUGZILLA: "https://localhost/bugzilla/",
-		STATUS: "http://status.localhost/",
-		APIURL: "http://localhost",
-		WEBURL: "http://localhost/nfvportal",
-		APIOAUTHURL: "http://localhost/auth/realms/openslice",
-		APITMFURL: "http://localhost/tmf-api/serviceCatalogManagement/v4"
+		TITLE: "Openslice",
+		WIKI: "ROOTURL",
+		BUGZILLA: "ROOTURL/bugzilla/",
+		STATUS: "ROOTURL/status/",
+		APIURL: "http://localost:13000",
+		WEBURL: "ROOTURL/nfvportal",
+		APIOAUTHURL: "ROOTURL/auth/realms/openslice",
+		APITMFURL: "ROOTURL/tmf-api/serviceCatalogManagement/v4"
 		
 	  };
 });
