@@ -62,6 +62,7 @@
 								<p>Last update: <strong>{{gridItem.dateUpdated | date:'medium' }}</strong></p>
 								<p>Date created: <strong>{{gridItem.dateCreated| date:'medium'}}</strong></p>
 								 -->
+								<a class="btn btn-warning" ng-click="softDeleteApp(gridItem, gridItem.id)"><i class="fa fa-trash-o "></i></a>
 								<a class="btn btn-danger" ng-click="deleteApp(gridItem, gridItem.id)"><i class="fa fa-trash-o "></i></a>
 								<a class="btn btn-primary" ng-href="#!/experiment_edit/{{gridDisplayItem.id}}"><i class="fa fa-pencil-square-o "></i></a>									
 								<a class="btn btn-info" ng-href="#!/experiment_view/{{gridDisplayItem.id}}"><i class="fa fa-info-circle "></i></a>

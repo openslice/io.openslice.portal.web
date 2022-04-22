@@ -100,13 +100,14 @@ appServices.factory('Category', function($resource, APIEndPointService) {
 appServices.factory('ExperimentMetadata', function($resource, APIEndPointService) {
 	
 	return $resource(APIEndPointService.APIURL+"/osapi/experiments/:id", 
-			{ id: '@id' }, {				
-		
+			{ 
+				id: '@id' 
+			},
+			{				
 		    update: {
 		        method: 'PUT' // this method issues a PUT request      	
 		      	}
-	});
-	
+			});	
 });
 
 
@@ -114,13 +115,19 @@ appServices.factory('ExperimentMetadata', function($resource, APIEndPointService
 appServices.factory('AdminExperimentMetadata', function($resource, APIEndPointService) {
 	
 	return $resource(APIEndPointService.APIURL+"/osapi/admin/experiments/:id", 
-			{ id: '@id' }, {				
-		
-		    update: {
-		        method: 'PUT' // this method issues a PUT request      	
-		      	}
-	});
-	
+			{ 
+				id: '@id' 
+			}, 
+			{						
+			    update: {
+			        method: 'PUT' // this method issues a PUT request      	
+			      	},
+				softdelete:{
+					method:'DELETE',
+					url:APIEndPointService.APIURL+"/osapi/admin/experiments/:id/softdelete", 
+					params:{id: '@id'}
+					}				
+			});	
 });
 
 
@@ -270,12 +277,17 @@ appServices.factory('VxFMetadata', function($resource, APIEndPointService) {
 
 appServices.factory('AdminVxFMetadata', function($resource, APIEndPointService) {
 	return $resource(APIEndPointService.APIURL+"/osapi/admin/vxfs/:id", 
-		{id : "@id"	}, {
-		"update" : {
-			method : "PUT"
-		}
-
-	});
+		{id : "@id"	},
+		{						
+		    update: {
+		        method: 'PUT' // this method issues a PUT request      	
+		      	},
+			softdelete: {
+				method:'DELETE',
+				url:APIEndPointService.APIURL+"/osapi/admin/vxfs/:id/softdelete", 
+				params:{id: '@id'}
+				}				
+		});
 });
 
 
