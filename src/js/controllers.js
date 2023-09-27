@@ -374,7 +374,7 @@ appControllers.controller('ExperimentAddController', function($scope, $location,
 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'/osapi/admin/experiments/',
+			url : APIEndPointService.APIURL+'/osapi/admin/experiments',
 			headers : {
 				'Content-Type' : undefined
 			},
@@ -430,7 +430,7 @@ appControllers.controller('ExperimentUploadController', function($scope, $locati
 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'/osapi/admin/experiments/',
+			url : APIEndPointService.APIURL+'/osapi/admin/experiments',
 			headers : {
 				'Content-Type' : undefined
 			},
