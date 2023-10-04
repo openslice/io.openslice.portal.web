@@ -1,4 +1,4 @@
-<div class="page-header" >
+g<div class="page-header" >
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -13,11 +13,20 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="portalinfrastructure.datacentername" class="col-sm-2 control-label">VIM's MANO Provider Name</label>
+						<label for="manoProviderSelect" class="col-sm-2 control-label">Select a MANO Provider:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control"  ng-model="portalinfrastructure.datacentername" value="" placeholder="VIM's MANO Provider Name..." />
+						  <select class="form-control" id="manoProviderSelect" ng-model="portalinfrastructure.mp" ng-options="(manoprovider.id + ' - ' + manoprovider.name) for manoprovider in manoproviders" ng-change="updateDatacentername()">
+						  </select>
 						</div>
-					</div>					
+					  </div>
+					  <div class="form-group">
+						<label for="portalinfrastructure.datacentername" class="col-sm-2 control-label">Datacenter VIM Name</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" ng-model="portalinfrastructure.datacentername"
+								 ng-disabled="true"
+								 placeholder="Datacenter VIM name..." />
+						</div>
+					  </div>					
 					<div class="form-group">
 						<label for="organization" class="col-sm-2 control-label">Organization</label>
 						<div class="col-sm-10">

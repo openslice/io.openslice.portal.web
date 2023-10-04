@@ -2708,24 +2708,48 @@ appControllers.controller('InfrastructureListController', ['$scope','$window','$
 	
 
 
-appControllers.controller('InfrastructureAddController',function($scope, $location, Infrastructure){
+appControllers.controller('InfrastructureAddController',  ['$scope','$window','$log', '$location', 'Infrastructure', 'AdminMANOprovider', function($scope, $window, $log, $location, Infrastructure, AdminMANOprovider){
 
     $scope.portalinfrastructure=new Infrastructure();
+	
+	$scope.manoproviders = AdminMANOprovider.query(function() {
+		
+		//console.log($scope.categories);
+	  }); //query() returns all the categories
+	console.log($scope.manoproviders)
+	$scope.updateDatacentername = function() {
+		console.log("portalinfrastructure.mp.name = " + $scope.portalinfrastructure.mp.name );
+		
+		$scope.portalinfrastructure.datacentername =  $scope.portalinfrastructure.mp.name
+		console.log("portalinfrastructure.datacentername = " + $scope.portalinfrastructure.datacentername );
+		
+				
+  }
 
     $scope.addInfrastructure =function(){
+		
+
         $scope.portalinfrastructure.$save(function(){
 			$location.path("/infrastructures");
         });
     }
 
-});
+}]);
 
-appControllers.controller('InfrastructureEditController', ['$scope', '$route', '$routeParams', '$location', 'Infrastructure', '$anchorScroll',
-        function( $scope, $route, $routeParams, $location, Infrastructure, $anchorScroll){
+appControllers.controller('InfrastructureEditController', ['$scope', '$window', '$log', '$location', '$route', '$routeParams', 'Infrastructure', '$anchorScroll', 'AdminMANOprovider',
+        function( $scope, $window, $log, $location, $route, $routeParams, Infrastructure, $anchorScroll, AdminMANOprovider){
 
-
-    //console.log("WILL EDIT User with ID "+$routeParams.id);
 	
+	$scope.manoproviders = AdminMANOprovider.query(function() {
+    //console.log("WILL EDIT User with ID "+$routeParams.id);
+	});
+	console.log($scope.manoproviders)
+	$scope.editDatacentername = function() {
+		console.log("portalinfrastructure.mp.name = " + $scope.portalinfrastructure.mp.name );
+		
+		$scope.portalinfrastructure.datacentername =  $scope.portalinfrastructure.mp.name
+		console.log("portalinfrastructure.datacentername = " + $scope.portalinfrastructure.datacentername );
+	}	
     $scope.updateInfrastructure=function(){
     	
         $scope.portalinfrastructure.$update(function(){
