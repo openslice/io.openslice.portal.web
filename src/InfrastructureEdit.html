@@ -17,11 +17,20 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="portalinfrastructure.datacentername" class="col-sm-2 control-label">VIM's MANO Provider Name</label>
+						<label for="manoProviderSelect" class="col-sm-2 control-label">Select a MANO Provider:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control"  ng-model="portalinfrastructure.datacentername" value="" placeholder="VIM's MANO Provider Name..." />
+						  <select class="form-control" id="manoProviderSelect" ng-model="portalinfrastructure.mp" ng-options="(manoprovider.id + ' - ' + manoprovider.name) for manoprovider in manoproviders" ng-change="editDatacentername()">
+						  </select>
 						</div>
-					</div>
+					  </div>
+					  <div class="form-group">
+						<label for="portalinfrastructure.datacentername" class="col-sm-2 control-label">Datacenter VIM Name</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" ng-model="portalinfrastructure.datacentername"
+								 ng-disabled="true"
+								 placeholder="Datacenter VIM name..." />
+						</div>
+					  </div>
 					
 
 					<div class="form-group">
