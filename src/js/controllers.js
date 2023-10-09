@@ -2056,7 +2056,7 @@ appControllers.controller('DeploymentAddController', ['$scope', '$route', '$root
 		
     	return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'/osapi/admin/deployments/',
+			url : APIEndPointService.APIURL+'/osapi/admin/deployments',
 			headers : {
 				'Content-Type' : 'application/json'
 			},
