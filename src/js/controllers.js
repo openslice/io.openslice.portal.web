@@ -276,7 +276,7 @@ appControllers.controller('ExperimentListController', ['$scope','$window','$log'
                  	
                  	
 
- 	$scope.apps = AdminExperimentMetadata.query(function() {	 		
+	$scope.apps = AdminExperimentMetadata.query(function() {	 		
 	 		angular.forEach( $scope.apps , function( app, appkey) {
 	    		
 	 			if ( app.iconsrc.indexOf( 'unknown' ) !== -1 ){
@@ -294,31 +294,40 @@ appControllers.controller('ExperimentListController', ['$scope','$window','$log'
 	 		});
 
  		}); //query() returns all the subscribedresources
- 		 
- 	
- 	
- 	 $scope.deleteApp = function(gridItem, useridx){
-
+ 		  	 	
+	$scope.deleteApp = function(gridItem, useridx){
  		$log.debug("Selected to DELETE AdminExperimentMetadata with id = "+ useridx);
- 		 	
+	 	var app=AdminExperimentMetadata.get({id:useridx}, function() {
+		    $log.debug("WILL DELETE AdminExperimentMetadata with ID "+ app.id);
+		    
+	        if(popupService.showPopup('Really delete Application "'+app.name+'" ?')){
+			 	
+	        	app.$delete(function(){
+	    			$scope.apps.splice($scope.apps.indexOf(gridItem),1)
+	            }, function errorCallback() {
+	               alert( "Status:" + response.status + " - Failed to delete NSD! " + response.data["detail"]  );
+	           });
+	        
+	        }
+	 	}); 		 	
+    }            
 
- 		 	var app=AdminExperimentMetadata.get({id:useridx}, function() {
- 			    $log.debug("WILL DELETE AdminExperimentMetadata with ID "+ app.id);
- 			    
- 		        if(popupService.showPopup('Really delete Application "'+app.name+'" ?')){
- 				 	
- 		        	app.$delete(function(){
- 		    			$scope.apps.splice($scope.apps.indexOf(gridItem),1)
- 		            }, function errorCallback(response) {
-  		               alert( "Status:" + response.status + " - Failed to delete NSD! " + response.data["detail"]  );
-  		           });
- 		        
- 		        }
- 		 	});
- 		 	
- 	    }
- 	          	
-                 	 
+	$scope.softDeleteApp = function(gridItem, useridx){
+		$log.debug("Selected to SOFT DELETE AdminExperimentMetadata with id = "+ useridx);
+	 	var app=AdminExperimentMetadata.get({id:useridx}, function() {
+		    $log.debug("WILL SOFT DELETE AdminExperimentMetadata with ID "+ app.id);
+		    
+	        if(popupService.showPopup('Really soft delete Application "'+app.name+'" ?')){
+			 	//Here we can add a real http delete functionality. Thi
+	        	app.$softdelete(function(){
+	    			$scope.apps.splice($scope.apps.indexOf(gridItem),1)
+	            }, function errorCallback(response) {
+	               alert( "Failed to soft delete NSD! Please check for related dependencies");
+	           });
+	        
+	        }
+	 	}); 		 	
+    }     	 
 }]);
 
 appControllers.controller('ExperimentAddController', function($scope, $location,
@@ -365,7 +374,7 @@ appControllers.controller('ExperimentAddController', function($scope, $location,
 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'/osapi/admin/experiments/',
+			url : APIEndPointService.APIURL+'/osapi/admin/experiments',
 			headers : {
 				'Content-Type' : undefined
 			},
@@ -421,7 +430,7 @@ appControllers.controller('ExperimentUploadController', function($scope, $locati
 
 		return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'/osapi/admin/experiments/',
+			url : APIEndPointService.APIURL+'/osapi/admin/experiments',
 			headers : {
 				'Content-Type' : undefined
 			},
@@ -1120,6 +1129,25 @@ appControllers.controller('VxFListController', ['$scope','$window','$log', 'Admi
  		 	});
  	    }
  	          	
+ 	 $scope.softDeleteVxF = function(gridItem, useridx){
+
+ 		$log.debug("Selected to SOFT DELETE AdminVxFMetadata with id = "+ useridx);
+ 		 	
+
+ 		 	var vxf=AdminVxFMetadata.get({id:useridx}, function() {
+ 			    $log.debug("WILL SOFT DELETE VxFMetadatawith ID "+ vxf.id);
+ 			    
+ 		        if(popupService.showPopup('Really soft delete VxF "'+vxf.name+'" ?')){
+ 				 	
+ 		        	vxf.$softdelete(function(){
+ 		    			$scope.vxfs.splice($scope.vxfs.indexOf(gridItem),1)
+ 		            }, function errorCallback() {
+   		               alert( "Failed to soft delete VNF! Please check for related dependencies"  );
+ 		           });
+ 		        
+ 		        }
+ 		 	});
+ 	    }
                  	 
 }]);
 
@@ -2028,7 +2056,7 @@ appControllers.controller('DeploymentAddController', ['$scope', '$route', '$root
 		
     	return $http({
 			method : 'POST',
-			url : APIEndPointService.APIURL+'/osapi/admin/deployments/',
+			url : APIEndPointService.APIURL+'/osapi/admin/deployments',
 			headers : {
 				'Content-Type' : 'application/json'
 			},
@@ -2680,24 +2708,48 @@ appControllers.controller('InfrastructureListController', ['$scope','$window','$
 	
 
 
-appControllers.controller('InfrastructureAddController',function($scope, $location, Infrastructure){
+appControllers.controller('InfrastructureAddController',  ['$scope','$window','$log', '$location', 'Infrastructure', 'AdminMANOprovider', function($scope, $window, $log, $location, Infrastructure, AdminMANOprovider){
 
     $scope.portalinfrastructure=new Infrastructure();
+	
+	$scope.manoproviders = AdminMANOprovider.query(function() {
+		
+		//console.log($scope.categories);
+	  }); //query() returns all the categories
+	console.log($scope.manoproviders)
+	$scope.updateDatacentername = function() {
+		console.log("portalinfrastructure.mp.name = " + $scope.portalinfrastructure.mp.name );
+		
+		$scope.portalinfrastructure.datacentername =  $scope.portalinfrastructure.mp.name
+		console.log("portalinfrastructure.datacentername = " + $scope.portalinfrastructure.datacentername );
+		
+				
+  }
 
     $scope.addInfrastructure =function(){
+		
+
         $scope.portalinfrastructure.$save(function(){
 			$location.path("/infrastructures");
         });
     }
 
-});
+}]);
 
-appControllers.controller('InfrastructureEditController', ['$scope', '$route', '$routeParams', '$location', 'Infrastructure', '$anchorScroll',
-        function( $scope, $route, $routeParams, $location, Infrastructure, $anchorScroll){
+appControllers.controller('InfrastructureEditController', ['$scope', '$window', '$log', '$location', '$route', '$routeParams', 'Infrastructure', '$anchorScroll', 'AdminMANOprovider',
+        function( $scope, $window, $log, $location, $route, $routeParams, Infrastructure, $anchorScroll, AdminMANOprovider){
 
-
-    //console.log("WILL EDIT User with ID "+$routeParams.id);
 	
+	$scope.manoproviders = AdminMANOprovider.query(function() {
+    //console.log("WILL EDIT User with ID "+$routeParams.id);
+	});
+	console.log($scope.manoproviders)
+	$scope.editDatacentername = function() {
+		console.log("portalinfrastructure.mp.name = " + $scope.portalinfrastructure.mp.name );
+		
+		$scope.portalinfrastructure.datacentername =  $scope.portalinfrastructure.mp.name
+		console.log("portalinfrastructure.datacentername = " + $scope.portalinfrastructure.datacentername );
+	}	
     $scope.updateInfrastructure=function(){
     	
         $scope.portalinfrastructure.$update(function(){

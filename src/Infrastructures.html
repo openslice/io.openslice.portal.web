@@ -9,23 +9,26 @@
 				<br>
 				<br>
 				<table id="grid1" tr-ng-grid="" class="usersGrid" items="portalinfrastructures"
-					fields="['id', 'name', 'datacentername', 'organization', 'email', 'vimid' ]">
+					fields="['id', 'name', 'datacentername', 'organization', 'email', 'vimid', 'infrastructureStatus']">
 					<thead>
 						<tr>
-							<th field-name="id" display-name="Id" cell-width="5em"
-								display-align="right"></th>
-
+							<th field-name="id" display-name="Id" cell-width="5em" display-align="right"></th>
 							<th field-name="name" display-name="Name"></th>
-							<th field-name="name" display-name="Datacenter VIM Name"></th>
+							<th field-name="name" display-name="VIM's MANO Provider Name"></th>
 							<th field-name="organization" display-name="Organization"></th>
 							<th field-name="email" display-name="e-mail"></th>
 							<th field-name="vimid" display-name="VIM id"></th>
-
-							</th>
+							<th>
+			                    <div class="tr-ng-title">
+									Creation Date
+			                    </div>
+							</th>							
+							<th field-name="infrastructureStatus" display-name="Status"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
+							<td>  <span>{{gridItem.dateCreated| date:'medium'}} </span></td>
 							<td nowrap="nowrap">
 								<a class="btn btn-danger" ng-click="deleteInfrastructure(gridItem, gridItem.id,  gridItem.name)"><i class="fa fa-trash-o "></i></a>
 								<a class="btn btn-primary" ng-href="#!/edit_infrastructure/{{gridDisplayItem.id}}"><i class="fa fa-pencil-square-o "></i></a>							

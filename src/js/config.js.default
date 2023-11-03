@@ -7,7 +7,7 @@ appConfig.factory('APIEndPointService', function() {
 		WIKI: "ROOTURL",
 		BUGZILLA: "ROOTURL/bugzilla/",
 		STATUS: "ROOTURL/status/",
-		APIURL: "http://localost:13000",
+		APIURL: "http://localhost:13000",
 		WEBURL: "ROOTURL/nfvportal",
 		APIOAUTHURL: "ROOTURL/auth/realms/openslice",
 		APITMFURL: "ROOTURL/tmf-api/serviceCatalogManagement/v4"
